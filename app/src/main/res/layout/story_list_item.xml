@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_tx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="11"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <TextView
+        android:id="@+id/textView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="36dp"
+        android:text="Health Awareness"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="180dp"
+        android:layout_height="32dp"
+
+        android:text="Title"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="179dp"
+        android:layout_height="40dp"
+
+        android:text="read more ..."
+        android:textAlignment="center"
+        android:textColor="#e56829e6"
+        android:textColorLink="#123456"
+        android:textSize="18sp" />
+
+
+
+
+</LinearLayout>

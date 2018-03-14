@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single" android:id="@+id/admin_group" android:visible="false">
+        <item android:id="@+id/add_hospital" android:title="Add Hospital"/>
+        <item
+            android:id="@+id/home1"
+            android:title="home" />
+        <item
+            android:id="@+id/nav_hospitallist"
+            android:title="hospital list" />
+        <item
+            android:id="@+id/nav_addhospital"
+            android:title="add hospital" />
+        <item
+            android:id="@+id/Nav_addcancer"
+            android:title="add cancer" />
+    </group>
+
+
+    <group android:checkableBehavior="single" android:id="@+id/hospital_admin_group" android:visible="false">
+
+        <item
+            android:id="@+id/home2"
+            android:title="home" />
+        <item
+            android:id="@+id/nav_addawarness"
+            android:title="add awarness" />
+        <item
+            android:id="@+id/nav_awarness"
+            android:title="awarness" />
+
+    </group>
+    <group android:checkableBehavior="single" android:id="@+id/user_group" android:visible="false">
+        <item
+            android:id="@+id/Nav_user_home3"
+            android:title="home" />
+        <item
+            android:id="@+id/Nav_stories"
+            android:title="stories" />
+        <item
+            android:id="@+id/Nav_awareness"
+            android:title="add awareness" />
+
+        <item
+            android:id="@+id/Nav_cancer_type"
+            android:title="cancer type" />
+
+    </group>
+
+    <item
+        android:id="@+id/sign_out"
+
+
+        android:title="Sign Out" />
+
+
+
+</menu>
