@@ -36,17 +36,17 @@
     <TextView
         android:id="@+id/cancer_treatment"
         android:layout_width="match_parent"
-        android:layout_height="163dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="14sp"
         android:textStyle="bold"
         tools:text="Cancer treatment" />
+
     <Button
         android:id="@+id/cancel_action"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="69dp"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="100dp"
         android:background="@color/colorPrimary"
