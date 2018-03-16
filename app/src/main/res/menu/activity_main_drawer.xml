@@ -8,32 +8,32 @@
         <item android:id="@+id/add_hospital" android:title="Add Hospital"/>
         <item
             android:id="@+id/home1"
-            android:title="home" />
+            android:title="Home" />
         <item
             android:id="@+id/nav_hospitallist"
-            android:title="hospitals add,edit and,delete" />
+            android:title="Hospitals add,edit and,delete" />
 
         <item
             android:id="@+id/Nav_add_cancer"
-            android:title="add cancer type information" />
+            android:title="Add cancer type information" />
         <item
             android:id="@+id/nav_add_awarness"
-            android:title="add awareness" />
+            android:title="Add awareness" />
         <item
             android:id="@+id/nav_view_awarness"
-            android:title="awareness" />
+            android:title="Awareness" />
         <item
             android:id="@+id/Nav_stories1"
-            android:title="stories" />
+            android:title="Stories" />
         <item
             android:id="@+id/Nav_add_story1"
-            android:title="add your story" />
+            android:title="Add your story" />
         <item
             android:id="@+id/Nav_cancer_type1"
-            android:title="cancer  types information" />
+            android:title="Cancer  types information" />
         <item
             android:id="@+id/Nav_view_awareness1"
-            android:title="awareness " />
+            android:title="Awareness " />
     </group>
 
 
@@ -41,32 +41,32 @@
 
         <item
             android:id="@+id/home2"
-            android:title="home" />
+            android:title="Home" />
         <item
             android:id="@+id/nav_addawarness"
-            android:title="add awareness" />
+            android:title="Add awareness" />
         <item
             android:id="@+id/nav_awarness"
-            android:title="awareness" />
+            android:title="Awareness" />
 
     </group>
     <group android:checkableBehavior="single" android:id="@+id/user_group" android:visible="false">
         <item
             android:id="@+id/Nav_user_home3"
-            android:title="home" />
+            android:title="Home" />
         <item
             android:id="@+id/Nav_stories"
-            android:title="stories" />
+            android:title="Stories" />
 
         <item
             android:id="@+id/Nav_add_story"
-            android:title="add your story" />
+            android:title="Add your story" />
         <item
             android:id="@+id/Nav_cancer_type"
-            android:title="cancers types information " />
+            android:title="Cancer types information " />
         <item
             android:id="@+id/Nav_view_awareness"
-            android:title="awareness " />
+            android:title="Awareness " />
 
     </group>
 
