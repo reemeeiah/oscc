@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
->
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    >
 
     <EditText
-        android:id="@+id/editText66"
+        android:id="@+id/awareness_title"
+
         android:layout_width="223dp"
         android:layout_height="47dp"
-        android:layout_marginTop="161dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="29dp"
         android:ems="10"
-        android:hint="Awareness Subject"
+        android:hint="awareness title"
         android:inputType="textMultiLine|textPersonName"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:theme="@style/Animation.AppCompat.Dialog"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.553"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:theme="@style/Animation.AppCompat.Dialog" />
 
     <EditText
-        android:id="@+id/editText77"
+        android:id="@+id/aw_description_add"
         style="@android:style/Widget.DeviceDefault.AutoCompleteTextView"
-        android:layout_width="324dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="328dp"
+        android:layout_height="227dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/boxedit"
         android:ems="10"
-        android:hint="write the awareness"
+        android:hint="write the description"
         android:inputType="textMultiLine"
         android:keyboardNavigationCluster="?android:attr/windowOverscan"
         android:selectAllOnFocus="false"
@@ -42,39 +41,40 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textEditSideNoPasteWindowLayout="@style/Animation.AppCompat.DropDownUp"
         android:textSize="24sp"
-        android:visibility="visible"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText66" />
+        android:visibility="visible" />
 
-    <Button
-        android:id="@+id/buttonc"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="@android:string/cancel"
-        android:textColor="@color/backg1"
-        android:textSize="18sp"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText77" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button677"
-        android:layout_width="103dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="216dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="@android:string/cancel"
-        android:textColor="@color/backg1"
-        android:textSize="18sp"
+        <Button
+            android:id="@+id/cancel_"
+            android:layout_width="142dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="10dp"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText77"
-        tools:text="submit" />
+            android:layout_marginLeft="220dp"
+            android:background="@android:color/holo_blue_dark"
+            android:text="@android:string/cancel"
 
-</android.support.constraint.ConstraintLayout>
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            tools:ignore="UnknownId"
+            tools:layout_editor_absoluteY="623dp" />
+
+        <Button
+            android:id="@+id/submit_cancer"
+            android:layout_width="142dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="40dp"
+            android:background="@android:color/holo_blue_dark"
+            android:text="Submit"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteY="610dp" />
+
+    </FrameLayout>
+
+</LinearLayout>
