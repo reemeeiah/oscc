@@ -13,7 +13,7 @@
         android:layout_height="42dp"
 
         android:layout_marginTop="20dp"
-        android:background="#6abf53"
+        android:background="#7ab4ad"
         android:text="Sign Up"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -67,7 +67,7 @@
         android:layout_height="39dp"
 
         android:layout_margin="10dp"
-        android:background="#6abf53"
+        android:background="#7ab4ad"
         android:text="LogIn"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
