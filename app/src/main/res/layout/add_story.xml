@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.onestopcancercenter.onestopcancercenter.StoryAdd">
+  >
 
     <EditText
         android:id="@+id/titleneme"
@@ -77,5 +77,11 @@
         app:layout_constraintStart_toEndOf="@+id/submit_"
         app:layout_constraintTop_toBottomOf="@+id/storytitle"
         tools:ignore="UnknownId" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
