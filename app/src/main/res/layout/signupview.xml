@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="#6abf53"
+        android:background="#7ab4ad"
         android:text="Sign up"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

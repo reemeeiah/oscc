@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         app:srcCompat="@drawable/c_2" />
     <TextView
-        android:id="@+id/story_title_tv"
+        android:id="@+id/cancer_show_title"
         android:layout_width="match_parent"
         android:layout_height="111dp"
         android:layout_marginBottom="10dp"
@@ -20,22 +20,33 @@
         android:textAlignment="center"
         android:textColor="#7ab4ad"
         android:textSize="24sp"
-        tools:text="story title" />
+        tools:text="cancer name" />
 
 
     <TextView
-        android:id="@+id/dettails_tv"
+        android:id="@+id/cancer_details"
         android:layout_width="match_parent"
         android:layout_height="163dp"
+        android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp"
-        tools:text="story details" />
+        tools:text="Cancer description" />
+
+    <TextView
+        android:id="@+id/cancer_treatment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="Cancer treatment" />
 
     <Button
         android:id="@+id/cancel_action"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="69dp"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="100dp"
         android:background="@color/colorPrimary"
@@ -43,6 +54,6 @@
         android:textAlignment="center"
         android:textColor="@color/backg1"
         android:textSize="18sp"
-        tools:text="back " />
+        tools:text="back" />
 
 </LinearLayout>

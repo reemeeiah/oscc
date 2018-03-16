@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:srcCompat="@drawable/c_2" />
+
     <TextView
-        android:id="@+id/story_title_tv"
+        android:id="@+id/awe_show_title"
         android:layout_width="match_parent"
         android:layout_height="111dp"
         android:layout_marginBottom="10dp"
@@ -20,17 +21,17 @@
         android:textAlignment="center"
         android:textColor="#7ab4ad"
         android:textSize="24sp"
-        tools:text="story title" />
+        tools:text="awareness title" />
 
 
     <TextView
-        android:id="@+id/dettails_tv"
+        android:id="@+id/show_aw_details"
         android:layout_width="match_parent"
         android:layout_height="163dp"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp"
-        tools:text="story details" />
+        tools:text="awareness description" />
 
     <Button
         android:id="@+id/cancel_action"
@@ -39,10 +40,9 @@
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="100dp"
         android:background="@color/colorPrimary"
-        android:text="back"
         android:textAlignment="center"
         android:textColor="@color/backg1"
-        android:textSize="18sp"
-        tools:text="back " />
+        tools:text="back"
+        android:textSize="18sp" />
 
 </LinearLayout>
