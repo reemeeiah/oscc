@@ -18,10 +18,10 @@
             android:title="add cancer type information" />
         <item
             android:id="@+id/nav_add_awarness"
-            android:title="add awarness" />
+            android:title="add awareness" />
         <item
             android:id="@+id/nav_view_awarness"
-            android:title="awarness" />
+            android:title="awareness" />
         <item
             android:id="@+id/Nav_stories1"
             android:title="stories" />
@@ -30,7 +30,7 @@
             android:title="add your story" />
         <item
             android:id="@+id/Nav_cancer_type1"
-            android:title="cancers information list1" />
+            android:title="cancer  types information" />
         <item
             android:id="@+id/Nav_view_awareness1"
             android:title="awareness " />
@@ -44,7 +44,7 @@
             android:title="home" />
         <item
             android:id="@+id/nav_addawarness"
-            android:title="add awarness" />
+            android:title="add awareness" />
         <item
             android:id="@+id/nav_awarness"
             android:title="awareness" />
@@ -63,7 +63,7 @@
             android:title="add your story" />
         <item
             android:id="@+id/Nav_cancer_type"
-            android:title="cancers information list" />
+            android:title="cancers types information " />
         <item
             android:id="@+id/Nav_view_awareness"
             android:title="awareness " />
