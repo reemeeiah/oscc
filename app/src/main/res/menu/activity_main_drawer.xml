@@ -16,6 +16,9 @@
             android:id="@+id/nav_addhospital"
             android:title="add hospital" />
         <item
+            android:id="@+id/nav_add_edit_delete_hospital"
+            android:title="add hospital" />
+        <item
             android:id="@+id/Nav_addcancer"
             android:title="add cancer" />
     </group>
@@ -41,9 +44,7 @@
         <item
             android:id="@+id/Nav_stories"
             android:title="stories" />
-        <item
-            android:id="@+id/Nav_awareness"
-            android:title="add awareness" />
+
 
         <item
             android:id="@+id/Nav_cancer_type"

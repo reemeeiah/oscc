@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="400dp"
     android:layout_height="400dp"
     android:orientation="vertical">
@@ -17,8 +18,9 @@
 
     <Button
         android:id="@+id/cancel_action"
-        android:layout_width="match_parent"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Button"
+        tools:text="@android:string/cancel" />
 
 </LinearLayout>
