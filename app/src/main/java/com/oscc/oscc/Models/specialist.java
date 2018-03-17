@@ -8,8 +8,8 @@ import org.json.JSONObject;
  */
 
 public class specialist {
-    int id,SpecialistHospitalId,SpecialistCancerId;
-    String SpecialistName,SpecialistMajor,SpecialistEmail ;
+    public int id,SpecialistHospitalId,SpecialistCancerId;
+    public String SpecialistName,SpecialistMajor,SpecialistEmail ;
 
     public specialist(){
 
