@@ -21,8 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.oscc.oscc.Models.Awareness;
+import com.oscc.oscc.Models.Cancer;
+import com.oscc.oscc.Models.Hospital;
+import com.oscc.oscc.Models.Specialist;
+import com.oscc.oscc.Models.Story;
 import com.oscc.oscc.Models.User;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
     NavigationView navigationView;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         server = new Server(MainActivity.this);
-        login();
+        fillData();
+
     }
 
     public void login()
@@ -302,5 +312,160 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void fillData()
+    {
+        // Fill Awarenesses
+        server.getAllAwarenesses(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Awarenesses","we got it");
+                try {
+                    JSONArray jAwarenesses = new JSONArray(new String(responseBody, "UTF-8"));
+                    Data.awarenesses.clear();
+                    for (int i=0;i<jAwarenesses.length();i++)
+                    {
+                        Awareness awareness = new Awareness(jAwarenesses.get(i).toString());
+                        Data.awarenesses.add(awareness);
+                        Log.e("Awarenesses"," "+awareness.AwareTitle);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Awarenesses","server error "+ statusCode);
+            }
+        });
+        // Fill Cancers
+        server.getAllCancers(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Cancers","we got it");
+                try {
+                    JSONArray jCancers = new JSONArray(new String(responseBody, "UTF-8"));
+                    Data.cancers.clear();
+                    for (int i=0;i<jCancers.length();i++)
+                    {
+                        Cancer cancer  = new Cancer(jCancers.get(i).toString());
+                        Data.cancers.add(cancer);
+                        Log.e("Cancers","  "+cancer.CancerName);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Cancers","server error "+ statusCode);
+            }
+        });
+
+        // Fill Hospitals
+        server.getAllHospitals(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Hospitals","we got it");
+                try {
+                    JSONArray jHospitals = new JSONArray(new String(responseBody, "UTF-8"));
+                    Data.hospitals.clear();
+                    for (int i=0;i<jHospitals.length();i++)
+                    {
+                        Hospital hospital   = new Hospital(jHospitals.get(i).toString());
+                        Data.hospitals.add(hospital);
+                        Log.e("Hospitals",hospital.HospitalName);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Hospitals","server error "+ statusCode);
+            }
+        });
+
+        // Fill Specialists
+        server.getAllSpecialists(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Specialists","we got it");
+                try {
+                    JSONArray jSpecialists = new JSONArray(new String(responseBody, "UTF-8"));
+                    Data.specialists.clear();
+                    for (int i=0;i<jSpecialists.length();i++)
+                    {
+                        Specialist specialist    = new Specialist(jSpecialists.get(i).toString());
+                        Data.specialists.add(specialist);
+                        Log.e("Specialists",specialist.SpecialistName);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Specialists","server error "+ statusCode);
+            }
+        });
+
+        // Fill Stories
+        server.getAllStories(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Stories","we got it");
+                try {
+                    JSONArray jStories = new JSONArray(new String(responseBody, "UTF-8"));
+                    Data.stories.clear();
+                    for (int i=0;i<jStories.length();i++)
+                    {
+                        Story story     = new Story(jStories.get(i).toString());
+                        Data.stories.add(story);
+                        Log.e("Stories",story.StoryTitle);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Stories","server error "+ statusCode);
+            }
+        });
+
+        login();
+
     }
 }

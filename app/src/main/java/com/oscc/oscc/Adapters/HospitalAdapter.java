@@ -17,8 +17,8 @@ import static com.oscc.oscc.R.layout.hospital_list_for_user;
  * Created by Nona on 3/17/2018.
  */
 
-public class hospitalAdapter extends ArrayAdapter<Hospital>{
-    public hospitalAdapter(@NonNull Context context, int resource) {
+public class HospitalAdapter extends ArrayAdapter<Hospital>{
+    public HospitalAdapter(@NonNull Context context, int resource) {
         super(context, resource);
         // TODO find resource
     }

@@ -1,5 +1,7 @@
 package com.oscc.oscc.Models;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,11 +25,13 @@ public class Cancer {
             JSONObject c = new JSONObject(jsonCancer);
             this.Id = c.getInt("Id");
 
-            this.CancerName = c.getString(" CancerName");
+            this.CancerName = c.getString("CancerName");
             this.CancerDescription = c.getString("CancerDescription");
             this.CancerTreatment = c.getString("CancerTreatment");
 
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
+            Log.e("Cancer", e.getMessage());
             e.printStackTrace();
         }
 

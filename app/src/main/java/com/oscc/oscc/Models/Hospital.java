@@ -1,7 +1,10 @@
 package com.oscc.oscc.Models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by asus on 10/03/18.
@@ -10,10 +13,11 @@ import org.json.JSONObject;
 public class Hospital {
     public int Id,HospitalAdminUserId;
     public String HospitalName,HospitalAddress,HospitalPhone,HospitalLatLong;
+    public ArrayList<Specialist> Specialists;
 
     public Hospital()
     {
-
+        Specialists = new ArrayList<>();
     }
     public Hospital(String jsonHospital)
     {
@@ -25,6 +29,13 @@ public class Hospital {
             this.HospitalAddress = t.getString("HospitalAddress");
             this.HospitalPhone = t.getString("HospitalPhone");
             this.HospitalLatLong = t.getString("HospitalLatLong");
+            this.Specialists = new ArrayList<>();
+            for(int i =0;i< t.getJSONArray("Specialists").length() ;i++ )
+            {
+                Specialists.add(new Specialist(t.getJSONArray("Specialists").get(i).toString()));
+            }
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -41,11 +52,27 @@ public class Hospital {
             t.put("HospitalAddress",this.HospitalAddress);
             t.put("HospitalPhone",this.HospitalPhone);
             t.put("HospitalLatLong",this.HospitalLatLong);
+            JSONArray jSpecialists = new JSONArray();
+            for (Specialist s: Specialists )
+            {
+                jSpecialists.put(s.toJson());
+            }
+            t.put("Specialists",jSpecialists);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         return t;
+    }
+
+    public void addSpecialist(Specialist specialist)
+    {
+        if(this.Id >0)
+        {
+            specialist.SpecialistHospitalId = this.Id;
+            this.Specialists.add(specialist);
+        }
+
     }
 
 }

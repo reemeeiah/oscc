@@ -1,5 +1,7 @@
 package com.oscc.oscc.Models;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,7 +13,7 @@ public class Awareness
 {
     public int Id;
 
-    public String AwareTitle, AwareDiscription,AwareTime;
+    public String AwareTitle, AwareDescription,AwareTime;
 
     public Awareness()
     {
@@ -23,8 +25,8 @@ public class Awareness
             JSONObject a = new JSONObject(jsonAwareness);
             this.Id = a.getInt("Id");
             this.AwareTime = a.getString("AwareTime");
-            this.AwareTitle = a.getString(" AwareTitle");
-            this.AwareDiscription = a.getString("AwareDiscription");
+            this.AwareTitle = a.getString("AwareTitle");
+            this.AwareDescription = a.getString("AwareDescription");
 
 
         } catch (JSONException e) {
@@ -38,10 +40,12 @@ public class Awareness
         JSONObject a = new JSONObject();
         try {
             a.put("Id",this.Id);
-            a.put("StoryTime",this.AwareTime);
-            a.put("StoryTitle",this.AwareTitle);
-            a.put("StoryDescription",this.AwareDiscription);
-        } catch (JSONException e) {
+            a.put("AwareTime",this.AwareTime);
+            a.put("AwareTitle",this.AwareTitle);
+            a.put("AwareDescription",this.AwareDescription);
+        } catch (JSONException e)
+        {
+            Log.e("Aware", e.getMessage());
             e.printStackTrace();
         }
 

@@ -5,6 +5,10 @@ import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.oscc.oscc.Models.Awareness;
+import com.oscc.oscc.Models.Cancer;
+import com.oscc.oscc.Models.Hospital;
+import com.oscc.oscc.Models.Specialist;
 import com.oscc.oscc.Models.Story;
 import com.oscc.oscc.Models.User;
 
@@ -45,6 +49,8 @@ public class Server {
         Log.i(" out ", user.toJson().toString());
         client.post(context, API_URL + "users/PostUser", entity, "application/json", handler);
     }
+
+
     public void getAllStories(AsyncHttpResponseHandler handler)
     {
         client.get(API_URL+"Stories/",handler);
@@ -55,6 +61,58 @@ public class Server {
         StringEntity entity = new StringEntity(story.toJson().toString(), "UTF-8");
         Log.i(" out ", story.toJson().toString());
         client.post(context, API_URL + "Stories/", entity, "application/json", handler);
+    }
+
+
+    // Cancers
+    public void getAllCancers(AsyncHttpResponseHandler handler)
+    {
+        client.get(API_URL+"Cancers/",handler);
+    }
+
+    public void postCancer(Cancer cancer, AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(cancer.toJson().toString(), "UTF-8");
+        Log.i(" out ", cancer.toJson().toString());
+        client.post(context, API_URL + "Cancers/", entity, "application/json", handler);
+    }
+
+    // Hospitals
+    public void getAllHospitals(AsyncHttpResponseHandler handler)
+    {
+        client.get(API_URL+"Hospitals/",handler);
+    }
+
+    public void postHospital(Hospital hospital , AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(hospital.toJson().toString(), "UTF-8");
+        Log.i(" out ", hospital.toJson().toString());
+        client.post(context, API_URL + "Hospitals/", entity, "application/json", handler);
+    }
+    // Specialists
+    public void getAllSpecialists(AsyncHttpResponseHandler handler)
+    {
+        client.get(API_URL+"Specialists/",handler);
+    }
+
+    public void postSpecialist(Specialist specialist  , AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(specialist.toJson().toString(), "UTF-8");
+        Log.i(" out ", specialist.toJson().toString());
+        client.post(context, API_URL + "Specialists/", entity, "application/json", handler);
+    }
+
+    // Awarenesses
+    public void getAllAwarenesses(AsyncHttpResponseHandler handler)
+    {
+        client.get(API_URL+"Awarenesses/",handler);
+    }
+
+    public void postAwareness(Awareness awareness   , AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(awareness.toJson().toString(), "UTF-8");
+        Log.i(" out ", awareness.toJson().toString());
+        client.post(context, API_URL + "Awarenesses/", entity, "application/json", handler);
     }
 
 }

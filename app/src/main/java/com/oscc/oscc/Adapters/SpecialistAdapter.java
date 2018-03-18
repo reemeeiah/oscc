@@ -8,24 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.oscc.oscc.Models.specialist;
+import com.oscc.oscc.Models.Specialist;
 import com.oscc.oscc.R;
 
 /**
  * Created by Nona on 3/17/2018.
  */
 
-public class specialistAdapter extends ArrayAdapter<specialist> {
+public class SpecialistAdapter extends ArrayAdapter<Specialist> {
 
 
-    public specialistAdapter(@NonNull Context context, int resource) {
+    public SpecialistAdapter(@NonNull Context context, int resource) {
         super(context, resource);
         //TODO resource
     }
 
     public View getVeiw(int position, View convertView , ViewGroup parent){
 
-        specialist s = getItem(position);
+        Specialist s = getItem(position);
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.hospital_info_when_click_hospital_list_view,parent,false);
 

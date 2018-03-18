@@ -7,15 +7,15 @@ import org.json.JSONObject;
  * Created by Nona ^^ on 3/10/2018.
  */
 
-public class specialist {
+public class Specialist {
     public int id,SpecialistHospitalId,SpecialistCancerId;
     public String SpecialistName,SpecialistMajor,SpecialistEmail ;
 
-    public specialist(){
+    public Specialist(){
 
     }
 
-    public specialist(String jasonSpecialist){
+    public Specialist(String jasonSpecialist){
 
         try {
             JSONObject t = new JSONObject(jasonSpecialist);
@@ -33,7 +33,7 @@ public class specialist {
 
     }
 
-    public JSONObject toJason(){
+    public JSONObject toJson(){
         JSONObject t = new JSONObject();
         try {
             t.put("Id",id);
@@ -48,5 +48,11 @@ public class specialist {
 
         return t;
 
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.SpecialistName;
     }
 }

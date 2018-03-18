@@ -11,16 +11,14 @@ import android.widget.TextView;
 import com.oscc.oscc.Models.Awareness;
 import com.oscc.oscc.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by Nona on 3/17/2018.
  */
 
-public class awarenessAdapter extends ArrayAdapter<Awareness>{
+public class AwarenessAdapter extends ArrayAdapter<Awareness>{
 
 
-    public awarenessAdapter(@NonNull Context context, int resource) {
+    public AwarenessAdapter(@NonNull Context context, int resource) {
         super(context, resource);
         //find resource name
     }
