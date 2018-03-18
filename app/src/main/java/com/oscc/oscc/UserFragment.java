@@ -133,7 +133,7 @@ public class UserFragment extends Fragment {
 
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-Log.e("error",""+statusCode);
+                                        Log.e("error",""+statusCode);
                                     }
                                 });
                             }
@@ -153,5 +153,7 @@ Log.e("error",""+statusCode);
 
 
     }
+
+   // void setDrawer(Nav)
 
 }
