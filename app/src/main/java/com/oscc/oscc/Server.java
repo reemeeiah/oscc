@@ -89,6 +89,17 @@ public class Server {
         Log.i(" out ", hospital.toJson().toString());
         client.post(context, API_URL + "Hospitals/", entity, "application/json", handler);
     }
+
+    public void UpdateHospital(Hospital hospital , AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(hospital.toJson().toString(), "UTF-8");
+        Log.i(" out ", hospital.toJson().toString());
+        client.put(context, API_URL + "Hospitals/?Id="+hospital.Id, entity, "application/json", handler);
+    }
+    public void DeleteHospital(Hospital hospital , AsyncHttpResponseHandler handler)
+    {
+        client.delete(context, API_URL + "Hospitals/?Id="+hospital.Id, null, "application/json", handler);
+    }
     // Specialists
     public void getAllSpecialists(AsyncHttpResponseHandler handler)
     {

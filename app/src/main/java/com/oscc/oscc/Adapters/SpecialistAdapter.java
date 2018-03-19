@@ -1,7 +1,6 @@
 package com.oscc.oscc.Adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,30 +10,29 @@ import android.widget.TextView;
 import com.oscc.oscc.Models.Specialist;
 import com.oscc.oscc.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Nona on 3/17/2018.
  */
 
-public class SpecialistAdapter extends ArrayAdapter<Specialist> {
-
-
-    public SpecialistAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
-        //TODO resource
+public class SpecialistAdapter extends ArrayAdapter<Specialist>{
+    public SpecialistAdapter(Context context, ArrayList<Specialist> specialists) {
+        super(context,0, specialists);
+        // TODO find resource
     }
 
-    public View getVeiw(int position, View convertView , ViewGroup parent){
-
-        Specialist s = getItem(position);
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.hospital_info_when_click_hospital_list_view,parent,false);
-
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Specialist specialist = getItem(position);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.specialist_list_item, parent, false);
         }
-        ((TextView)convertView.findViewById(R.id.Specialist_Name)).setText(s.SpecialistName);
-        ((TextView)convertView.findViewById(R.id.Specialist_Major)).setText(s.SpecialistMajor);
-        ((TextView)convertView.findViewById(R.id.Specialist_Email)).setText(s.SpecialistEmail);
+
+        ((TextView)convertView.findViewById(R.id.specialistName_tv)).setText(specialist.SpecialistName);
+
+        convertView.setTag(specialist);
         return convertView;
-
-
     }
+
 }

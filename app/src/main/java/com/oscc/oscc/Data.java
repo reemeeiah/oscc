@@ -25,13 +25,22 @@ import static com.oscc.oscc.MainActivity.server;
 
 public class Data
 {
-    public static ArrayList<Cancer> cancers = new ArrayList<>();
-    public static ArrayList<Hospital> hospitals = new ArrayList<>();
-    public static ArrayList<Story> stories = new ArrayList<>();
-    public static ArrayList<Awareness> awarenesses = new ArrayList<>();
-    public static ArrayList<Specialist> specialists = new ArrayList<>();
+    public  ArrayList<Cancer> cancers;
+    public  ArrayList<Hospital> hospitals ;
+    public  ArrayList<Story> stories ;
+    public  ArrayList<Awareness> awarenesses ;
+    public  ArrayList<Specialist> specialists ;
 
-    public static void fillAwareness()
+    public Data()
+    {
+        cancers = new ArrayList<>();
+        hospitals = new ArrayList<>();
+        stories = new ArrayList<>();
+        awarenesses = new ArrayList<>();
+        specialists = new ArrayList<>();
+    }
+
+    public  void fillAwareness()
     {
         // Fill Awarenesses
         server.getAllAwarenesses(new AsyncHttpResponseHandler() {
@@ -41,11 +50,11 @@ public class Data
                 Log.e("Awarenesses","we got it");
                 try {
                     JSONArray jAwarenesses = new JSONArray(new String(responseBody, "UTF-8"));
-                    Data.awarenesses.clear();
+                    awarenesses.clear();
                     for (int i=0;i<jAwarenesses.length();i++)
                     {
                         Awareness awareness = new Awareness(jAwarenesses.get(i).toString());
-                        Data.awarenesses.add(awareness);
+                        awarenesses.add(awareness);
                         Log.e("Awarenesses"," "+awareness.AwareTitle);
                     }
                 } catch (JSONException e) {
@@ -64,7 +73,7 @@ public class Data
         });
     }
 
-    public static void fillCancers()
+    public  void fillCancers()
     {
         // Fill Cancers
         server.getAllCancers(new AsyncHttpResponseHandler() {
@@ -74,11 +83,11 @@ public class Data
                 Log.e("Cancers","we got it");
                 try {
                     JSONArray jCancers = new JSONArray(new String(responseBody, "UTF-8"));
-                    Data.cancers.clear();
+                    cancers.clear();
                     for (int i=0;i<jCancers.length();i++)
                     {
                         Cancer cancer  = new Cancer(jCancers.get(i).toString());
-                        Data.cancers.add(cancer);
+                       cancers.add(cancer);
                         Log.e("Cancers","  "+cancer.CancerName);
                     }
                 } catch (JSONException e) {
@@ -97,7 +106,7 @@ public class Data
         });
 
     }
-    public static void fillHospitals()
+    public  void fillHospitals()
     {
         // Fill Hospitals
         server.getAllHospitals(new AsyncHttpResponseHandler() {
@@ -107,11 +116,11 @@ public class Data
                 Log.e("Hospitals","we got it");
                 try {
                     JSONArray jHospitals = new JSONArray(new String(responseBody, "UTF-8"));
-                    Data.hospitals.clear();
+                    hospitals.clear();
                     for (int i=0;i<jHospitals.length();i++)
                     {
                         Hospital hospital   = new Hospital(jHospitals.get(i).toString());
-                        Data.hospitals.add(hospital);
+                        hospitals.add(hospital);
                         Log.e("Hospitals",hospital.HospitalName);
                     }
                 } catch (JSONException e) {
@@ -131,7 +140,7 @@ public class Data
 
     }
 
-    public static void fillSpecialists()
+    public  void fillSpecialists()
     {
         // Fill Specialists
         server.getAllSpecialists(new AsyncHttpResponseHandler() {
@@ -141,11 +150,11 @@ public class Data
                 Log.e("Specialists","we got it");
                 try {
                     JSONArray jSpecialists = new JSONArray(new String(responseBody, "UTF-8"));
-                    Data.specialists.clear();
+                    specialists.clear();
                     for (int i=0;i<jSpecialists.length();i++)
                     {
                         Specialist specialist    = new Specialist(jSpecialists.get(i).toString());
-                        Data.specialists.add(specialist);
+                        specialists.add(specialist);
                         Log.e("Specialists",specialist.SpecialistName);
                     }
                 } catch (JSONException e) {
@@ -165,7 +174,7 @@ public class Data
 
     }
 
-    public static void fillStories()
+    public  void fillStories()
     {
         // Fill Stories
         server.getAllStories(new AsyncHttpResponseHandler() {
@@ -175,11 +184,11 @@ public class Data
                 Log.e("Stories","we got it");
                 try {
                     JSONArray jStories = new JSONArray(new String(responseBody, "UTF-8"));
-                    Data.stories.clear();
+                    stories.clear();
                     for (int i=0;i<jStories.length();i++)
                     {
                         Story story     = new Story(jStories.get(i).toString());
-                        Data.stories.add(story);
+                       stories.add(story);
                         Log.e("Stories",story.StoryTitle);
                     }
                 } catch (JSONException e) {
@@ -199,7 +208,7 @@ public class Data
 
     }
 
-    public static void fillData()
+    public  void fillData()
     {
         fillAwareness();
         fillCancers();
