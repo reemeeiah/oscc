@@ -1,6 +1,7 @@
 package com.oscc.oscc;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,8 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.oscc.oscc.Models.Awareness;
+import com.oscc.oscc.Models.Cancer;
+import com.oscc.oscc.Models.Hospital;
+import com.oscc.oscc.Models.Specialist;
+import com.oscc.oscc.Models.Story;
 import com.oscc.oscc.Models.User;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,8 +42,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public  static Server  server;
     public static User user;
     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-
+    public static Data data = new Data();
     NavigationView navigationView;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         server = new Server(MainActivity.this);
-        login();
+        fillData();
+
     }
 
     public void login()
@@ -90,9 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Log.i("OK", res);
                             JSONObject juser = new JSONObject(res);
                             user = new User(juser.toString());
-                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userName_tv)).setText(user.UserName);
-                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userEmail_tv)).setText(user.UserEmail);
-
+                            setNav(navigationView);
                             Toast.makeText(MainActivity.this,"Welcome "+ user.UserName,Toast.LENGTH_LONG).show();
                             switch (user.UserType)
                             {
@@ -100,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 {
                                     //TODO go to admin activity
 
-//
-//                                    Intent hospital = new Intent(MainActivity.this,HospitalActivity.class);
-//                                    MainActivity.this.startActivity(hospital);
-                                    navigationView.getMenu().setGroupVisible(R.id.admin_group,true);
+
+                                    Intent hospital = new Intent(MainActivity.this,HospitalActivity.class);
+                                    MainActivity.this.startActivity(hospital);
+
 
 
 
@@ -115,14 +124,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 case 2:
                                 {
                                     //TODO go to hospital admin activity
-                                    navigationView.getMenu().setGroupVisible(R.id.hospital_admin_group,true);
+
                                    // fragmentManager.beginTransaction().replace(R.id.container, new HospitalFragment()).commit();
                                     break;
                                 }
                                 case 3:
                                 {
                                     //TODO go to user activity
-                                    navigationView.getMenu().setGroupVisible(R.id.user_group,true);
+
 
                                     UserFragment userFragment = new UserFragment();
                                     fragmentManager.beginTransaction().replace(R.id.container,userFragment).commit();
@@ -130,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     break;
                                 }
                             }
+
                             loginDialog.cancel();
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
@@ -302,5 +312,180 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void fillData()
+    {
+        // Fill Awarenesses
+        server.getAllAwarenesses(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Awarenesses","we got it");
+                try {
+                    JSONArray jAwarenesses = new JSONArray(new String(responseBody, "UTF-8"));
+                    data.awarenesses.clear();
+                    for (int i=0;i<jAwarenesses.length();i++)
+                    {
+                        Awareness awareness = new Awareness(jAwarenesses.get(i).toString());
+                        data.awarenesses.add(awareness);
+                        Log.e("Awarenesses"," "+awareness.AwareTitle);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Awarenesses","server error "+ statusCode);
+            }
+        });
+        // Fill Cancers
+        server.getAllCancers(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Cancers","we got it");
+                try {
+                    JSONArray jCancers = new JSONArray(new String(responseBody, "UTF-8"));
+                    data.cancers.clear();
+                    for (int i=0;i<jCancers.length();i++)
+                    {
+                        Cancer cancer  = new Cancer(jCancers.get(i).toString());
+                        data.cancers.add(cancer);
+                        Log.e("Cancers","  "+cancer.CancerName);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Cancers","server error "+ statusCode);
+            }
+        });
+
+        // Fill Hospitals
+        server.getAllHospitals(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Hospitals","we got it");
+                try {
+                    JSONArray jHospitals = new JSONArray(new String(responseBody, "UTF-8"));
+                    data.hospitals.clear();
+                    for (int i=0;i<jHospitals.length();i++)
+                    {
+                        Hospital hospital   = new Hospital(jHospitals.get(i).toString());
+                        data.hospitals.add(hospital);
+                        Log.e("Hospitals",hospital.HospitalName);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Hospitals","server error "+ statusCode);
+            }
+        });
+
+        // Fill Specialists
+        server.getAllSpecialists(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Specialists","we got it");
+                try {
+                    JSONArray jSpecialists = new JSONArray(new String(responseBody, "UTF-8"));
+                    data.specialists.clear();
+                    for (int i=0;i<jSpecialists.length();i++)
+                    {
+                        Specialist specialist    = new Specialist(jSpecialists.get(i).toString());
+                        data.specialists.add(specialist);
+                        Log.e("Specialists",specialist.SpecialistName);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Specialists","server error "+ statusCode);
+            }
+        });
+
+        // Fill Stories
+        server.getAllStories(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e("Stories","we got it");
+                try {
+                    JSONArray jStories = new JSONArray(new String(responseBody, "UTF-8"));
+                    data.stories.clear();
+                    for (int i=0;i<jStories.length();i++)
+                    {
+                        Story story     = new Story(jStories.get(i).toString());
+                        data.stories.add(story);
+                        Log.e("Stories",story.StoryTitle);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("Stories",e.getMessage());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                    Log.e("Stories2",e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("Stories","server error "+ statusCode);
+            }
+        });
+
+        login();
+
+    }
+
+    public static void setNav(NavigationView nav)
+    {
+        ((TextView) nav.getHeaderView(0).findViewById(R.id.userName_tv)).setText(user.UserName);
+        ((TextView) nav.getHeaderView(0).findViewById(R.id.userEmail_tv)).setText(user.UserEmail);
+        switch (user.UserType)
+        {
+            case 1:
+                nav.getMenu().setGroupVisible(R.id.admin_group,true);
+                break;
+            case 2:
+                nav.getMenu().setGroupVisible(R.id.hospital_admin_group,true);
+                break;
+            case 3:
+                nav.getMenu().setGroupVisible(R.id.user_group,true);
+                break;
+        }
+
+
     }
 }

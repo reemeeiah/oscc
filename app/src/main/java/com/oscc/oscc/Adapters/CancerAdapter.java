@@ -15,8 +15,8 @@ import com.oscc.oscc.R;
  * Created by Nona on 3/17/2018.
  */
 
-public class cancerAdapter extends ArrayAdapter<Cancer>{
-    public cancerAdapter(@NonNull Context context, int resource) {
+public class CancerAdapter extends ArrayAdapter<Cancer>{
+    public CancerAdapter(@NonNull Context context, int resource) {
         super(context, resource);
         //TODO resource
     }

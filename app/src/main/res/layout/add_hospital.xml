@@ -3,120 +3,133 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:drawingCacheQuality="auto"
     android:orientation="vertical">
 
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="89dp"
-        android:layout_marginTop="15dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="center"
-        app:srcCompat="@drawable/hospital" />
-
-    <EditText
-        android:id="@+id/hospital_name"
-        android:layout_width="250dp"
-        android:layout_height="39dp"
-        android:layout_marginLeft="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Hospital Name"
-        android:textAlignment="viewStart" />
-
-    <EditText
-        android:id="@+id/hospital_city"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Hospital address"
-        android:textAlignment="textStart" />
-
-    <EditText
-        android:id="@+id/hospital_contact"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Hospital Contact"
-        android:textAlignment="textStart" />
-
-
-    <EditText
-        android:id="@+id/hospital_Url"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Hospital Url"
-        android:textAlignment="textStart" />
-
-    <Button
-        android:id="@+id/add_hospital"
-        android:layout_width="102dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="120dp"
-        android:background="@drawable/ic_launcher_background"
-        android:textColor="@android:color/background_light"
-        tools:text="add+" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
-        tools:text="You can add more than one specialist" />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10"
 
-    <EditText
-        android:id="@+id/Specialist_Name"
-        android:layout_width="250dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="2"
+                app:srcCompat="@drawable/hospital" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/HospitalName_tx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/HospitalAddress_tx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:ems="10"
+            android:hint="Hospital address"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/HospitalPhone_tx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:ems="10"
+            android:hint="Hospital Contact"
+            android:inputType="textPersonName" />
+
+
+        <EditText
+            android:id="@+id/HospitalLatLong_tx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:ems="10"
+            android:hint="Hospital Phone"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/add_hospital_bt"
+            android:layout_width="102dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/background_light"
+            android:text="add+" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/specialist_lay"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Specialist Name"
-        android:textAlignment="textStart" />
+        android:orientation="vertical"
+        android:visibility="invisible">
 
-    <EditText
-        android:id="@+id/Specialist_Major"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Specialist Major"
-        android:textAlignment="textStart" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-    <EditText
-        android:id="@+id/Specialist_Email"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Specialist Email"
-        android:textAlignment="textStart" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
 
-    <Button
-        android:id="@+id/add_specialist"
-        android:layout_width="99dp"
-        android:layout_height="61dp"
-        android:layout_marginLeft="125dp"
-        android:background="@drawable/ic_launcher_background"
-        android:textColor="@android:color/background_light"
-        tools:text="add +" />
+                android:text="You can add more than one specialist"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/add_specialist_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="add +"
+                android:textColor="@android:color/background_light" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/hospital_specialist_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </LinearLayout>
+
+
+
+
+
 
 </LinearLayout>
