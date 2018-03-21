@@ -1,6 +1,8 @@
 package com.oscc.oscc;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.oscc.oscc.Adapters.HospitalAdapter;
@@ -55,8 +58,13 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onClick(View view) {
 
-               Hospital hospital = new Hospital();
-               showHospital(hospital,true);
+                if(user.UserType ==1)
+                {
+                    Hospital hospital = new Hospital();
+                    showHospital(hospital,true);
+                }
+
+
 
             }
         });
@@ -71,10 +79,6 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
         setNav(navigationView);
         hospitals_lv = (ListView)findViewById(R.id.hospitals_lv);
-        for(Hospital h: MainActivity.data.hospitals)
-        {
-            Log.e("acct",h.HospitalName);
-        }
 
         refreshHospitals();
 
@@ -99,24 +103,35 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
                 if(hospital.HospitalAdminUserId == user.Id)
                 {
 
-                    server.DeleteHospital(hospital, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            for(int i=0;i<data.hospitals.size();i++)
-                            {
-                                if(data.hospitals.get(i).Id == hospital.Id)
-                                {
-                                    data.hospitals.remove(i);
-                                }
-                            }
-                            refreshHospitals();
-                        }
+                    new AlertDialog.Builder(HospitalActivity.this)
+                            .setTitle("Title")
+                            .setMessage("Do you really want to Delete this Hospital?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    server.DeleteHospital(hospital, new AsyncHttpResponseHandler() {
+                                        @Override
+                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                            for(int i=0;i<data.hospitals.size();i++)
+                                            {
+                                                if(data.hospitals.get(i).Id == hospital.Id)
+                                                {
+                                                    data.hospitals.remove(i);
+                                                }
+                                            }
+                                            refreshHospitals();
+                                        }
 
-                        }
-                    });
+                                        @Override
+                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                                        }
+                                    });
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
+
+
 
 
                 }
@@ -215,6 +230,7 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             if(statusCode ==204)
                             {
+                                //search in the main activity data <hospitals array list> to find the matched id same like ours to be replased by the updated object
                                 for(int i=0;i<data.hospitals.size();i++)
                                 {
                                     if(data.hospitals.get(i).Id == hospital.Id)
