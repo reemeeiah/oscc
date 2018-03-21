@@ -5,10 +5,11 @@
 
 
     <group android:checkableBehavior="single" android:id="@+id/admin_group" android:visible="false">
-        <item android:id="@+id/add_hospital" android:title="Add Hospital"/>
         <item
             android:id="@+id/home1"
             android:title="Home" />
+
+
         <item
             android:id="@+id/nav_hospitallist"
             android:title="Hospitals add,edit and,delete" />
@@ -19,19 +20,19 @@
         <item
             android:id="@+id/nav_add_awarness"
             android:title="Add awareness" />
-
-        <item
-            android:id="@+id/Nav_stories1"
-            android:title="Stories" />
         <item
             android:id="@+id/Nav_add_story1"
             android:title="Add your story" />
         <item
-            android:id="@+id/Nav_cancer_type1"
-            android:title="Cancer types information" />
+            android:id="@+id/Nav_stories1"
+            android:title="Stories" />
         <item
             android:id="@+id/Nav_view_awareness1"
             android:title="Awareness " />
+        <item
+            android:id="@+id/Nav_cancer_type1"
+            android:title="Cancer types information" />
+
     </group>
 
 
