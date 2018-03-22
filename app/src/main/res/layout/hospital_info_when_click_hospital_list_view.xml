@@ -90,7 +90,7 @@
     <LinearLayout
         android:id="@+id/specialist_lay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="173dp"
         android:orientation="vertical"
         android:visibility="invisible">
 
@@ -106,10 +106,25 @@
         <ListView
             android:id="@+id/hospital_specialist_lv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
+            android:layout_height="wrap_content">
+
+
+        </ListView>
 
     </LinearLayout>
 
 
+    <Button
+        android:id="@+id/cancel_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="150dp"
+        android:background="@color/colorPrimary"
+        android:text="back"
+        android:textAlignment="center"
+        android:textColor="@color/backg1"
+        android:textSize="18sp"
+        tools:text="back" />
 
 </LinearLayout>
