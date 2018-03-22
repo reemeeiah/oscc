@@ -1,57 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:weightSum="10"
 
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="135dp"
-        android:layout_height="95dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="2"
         app:srcCompat="@drawable/hospital" />
 
-    <TextView
-        android:id="@+id/hospital_name_tv"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:orientation="vertical">
 
-        android:layout_marginBottom="20dp"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        tools:text="Hospital Name" />
+        <TextView
+            android:id="@+id/hospital_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="15dp">
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/HospitalAddress_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/view1"
-            android:layout_width="189dp"
-            android:layout_height="73dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="104dp"
-            android:background="@drawable/ic_launcher_background"
-            android:text="view"
-            android:textColor="@color/backg1"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-    </android.support.constraint.ConstraintLayout>
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:text="view " />
+    </LinearLayout>
+
 
 
 </LinearLayout>

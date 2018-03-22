@@ -104,7 +104,7 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
                 {
 
                     new AlertDialog.Builder(HospitalActivity.this)
-                            .setTitle("Title")
+                            .setTitle("warning")
                             .setMessage("Do you really want to Delete this Hospital?")
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

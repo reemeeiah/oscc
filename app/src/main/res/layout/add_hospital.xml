@@ -39,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
+                    android:hint="Hospital name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="24sp"

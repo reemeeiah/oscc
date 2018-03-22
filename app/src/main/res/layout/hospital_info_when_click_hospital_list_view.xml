@@ -88,61 +88,28 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/specialist_lay"
         android:layout_width="match_parent"
-        android:layout_height="167dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible">
 
-        <TextView
-            android:id="@+id/Specialist_Name"
-            android:layout_width="350dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Specialist Name"
-            android:textAlignment="textStart"
-            android:textSize="18sp" />
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-        <TextView
-            android:id="@+id/Specialist_Major"
-            android:layout_width="338dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="50dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Specialist Major"
-            android:textAlignment="textStart"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/Specialist_Email"
-            android:layout_width="338dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="50dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Specialist Email"
-            android:textAlignment="textStart"
-            android:textSize="18sp" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/hospital_specialist_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
 
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/cancel_action"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
-        android:textAlignment="center"
-        android:textColor="@color/backg1"
-        android:textSize="18sp"
-        tools:text="back" />
 
 </LinearLayout>
