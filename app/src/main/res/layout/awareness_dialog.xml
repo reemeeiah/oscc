@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/AwareTime_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:id="@+id/AwareTitle_tx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title" />
+
+        <EditText
+            android:id="@+id/AwareDescription_tx"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="Description"
+            android:inputType="textMultiLine" />
+
+    </LinearLayout>
+    <include layout="@layout/dialog_buttons" />
+</LinearLayout>

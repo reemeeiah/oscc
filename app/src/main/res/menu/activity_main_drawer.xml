@@ -4,76 +4,20 @@
     tools:showIn="navigation_view">
 
 
-    <group android:checkableBehavior="single" android:id="@+id/admin_group" android:visible="false">
-        <item
-            android:id="@+id/home1"
-            android:title="Home" />
-
-
-        <item
-            android:id="@+id/nav_hospitallist"
-            android:title="Hospitals add,edit and,delete" />
-
-        <item
-            android:id="@+id/Nav_add_cancer"
-            android:title="Add cancer type information" />
-        <item
-            android:id="@+id/nav_add_awarness"
-            android:title="Add awareness" />
-        <item
-            android:id="@+id/Nav_add_story1"
-            android:title="Add your story" />
-        <item
-            android:id="@+id/Nav_stories1"
-            android:title="Stories" />
-        <item
-            android:id="@+id/Nav_view_awareness1"
-            android:title="Awareness " />
-        <item
-            android:id="@+id/Nav_cancer_type1"
-            android:title="Cancer types information" />
+    <group android:id="@+id/main_menu" android:checkableBehavior="single">
+        <item android:id="@+id/hospitals"  android:title="Hospitals" />
+        <item android:id="@+id/cancers"  android:title="Cancers" />
+        <item android:id="@+id/awareness"  android:title="Awareness" />
+        <item android:id="@+id/specialists"  android:title="Specialists" />
+        <item android:id="@+id/stories"  android:title="Stories" />
 
     </group>
 
-
-    <group android:checkableBehavior="single" android:id="@+id/hospital_admin_group" android:visible="false">
-
-        <item
-            android:id="@+id/home2"
-            android:title="Home" />
-        <item
-            android:id="@+id/nav_addawarness"
-            android:title="Add awareness" />
-        <item
-            android:id="@+id/nav_awarness"
-            android:title="Awareness" />
-
-    </group>
-    <group android:checkableBehavior="single" android:id="@+id/user_group" android:visible="false">
-        <item
-            android:id="@+id/Nav_user_home3"
-            android:title="Home" />
-        <item
-            android:id="@+id/Nav_stories"
-            android:title="Stories" />
-
-        <item
-            android:id="@+id/Nav_add_story"
-            android:title="Add your story" />
-        <item
-            android:id="@+id/Nav_cancer_type"
-            android:title="Cancer types information " />
-        <item
-            android:id="@+id/Nav_view_awareness"
-            android:title="Awareness " />
-
-    </group>
-
-    <item
-        android:id="@+id/sign_out"
+    <item android:id="@+id/sign_out"  android:title="Sign Out" />
 
 
-        android:title="Sign Out" />
+
+
 
 
 

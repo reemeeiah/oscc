@@ -54,6 +54,21 @@ public class Cancer {
     }
 
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj instanceof Cancer){
+            Cancer c = (Cancer ) obj;
+            if( c.Id==Id) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return CancerName;
+    }
 
 
 }

@@ -8,7 +8,7 @@ import org.json.JSONObject;
  */
 
 public class Specialist {
-    public int id,SpecialistHospitalId,SpecialistCancerId;
+    public int Id,SpecialistHospitalId,SpecialistCancerId;
     public String SpecialistName,SpecialistMajor,SpecialistEmail ;
 
     public Specialist(){
@@ -19,7 +19,7 @@ public class Specialist {
 
         try {
             JSONObject t = new JSONObject(jasonSpecialist);
-            this.id=t.getInt("Id");
+            this.Id=t.getInt("Id");
             this.SpecialistCancerId= t.getInt("SpecialistCancerId");
             this.SpecialistHospitalId = t.getInt("SpecialistHospitalId");
             this.SpecialistEmail = t.getString("SpecialistEmail");
@@ -36,7 +36,7 @@ public class Specialist {
     public JSONObject toJson(){
         JSONObject t = new JSONObject();
         try {
-            t.put("Id",id);
+            t.put("Id",Id);
             t.put("SpecialistCancerId",SpecialistCancerId);
             t.put("SpecialistHospitalId",SpecialistHospitalId);
             t.put("SpecialistEmail",SpecialistEmail);

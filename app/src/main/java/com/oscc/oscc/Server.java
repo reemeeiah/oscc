@@ -63,6 +63,19 @@ public class Server {
         client.post(context, API_URL + "Stories/", entity, "application/json", handler);
     }
 
+    public void updateStory(Story story, AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(story.toJson().toString(), "UTF-8");
+        Log.i(" out ", story.toJson().toString());
+        client.put(context, API_URL + "Stories/?id="+story.Id, entity, "application/json", handler);
+    }
+
+    public void deleteStory(Story story, AsyncHttpResponseHandler handler)
+    {
+
+        client.delete(context, API_URL + "Stories/?id="+story.Id, null, "application/json", handler);
+    }
+
 
     // Cancers
     public void getAllCancers(AsyncHttpResponseHandler handler)
@@ -75,6 +88,18 @@ public class Server {
         StringEntity entity = new StringEntity(cancer.toJson().toString(), "UTF-8");
         Log.i(" out ", cancer.toJson().toString());
         client.post(context, API_URL + "Cancers/", entity, "application/json", handler);
+    }
+
+    public void updateCancer(Cancer cancer, AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(cancer.toJson().toString(), "UTF-8");
+        Log.i(" out ", cancer.toJson().toString());
+        client.put(context, API_URL + "Cancers/?id="+cancer.Id, entity, "application/json", handler);
+    }
+    public void deleteCancer(Cancer cancer, AsyncHttpResponseHandler handler)
+    {
+
+        client.delete(context, API_URL + "Cancers/?id="+cancer.Id, null, "application/json", handler);
     }
 
     // Hospitals
@@ -113,6 +138,18 @@ public class Server {
         client.post(context, API_URL + "Specialists/", entity, "application/json", handler);
     }
 
+    public void updateSpecialist(Specialist specialist  , AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(specialist.toJson().toString(), "UTF-8");
+        Log.i(" out ", specialist.toJson().toString());
+        client.put(context, API_URL + "Specialists/?id="+specialist.Id, entity, "application/json", handler);
+    }
+
+    public void deleteSpecialist(Specialist specialist  , AsyncHttpResponseHandler handler)
+    {
+        client.put(context, API_URL + "Specialists/?id="+specialist.Id, null, "application/json", handler);
+    }
+
     // Awarenesses
     public void getAllAwarenesses(AsyncHttpResponseHandler handler)
     {
@@ -124,6 +161,19 @@ public class Server {
         StringEntity entity = new StringEntity(awareness.toJson().toString(), "UTF-8");
         Log.i(" out ", awareness.toJson().toString());
         client.post(context, API_URL + "Awarenesses/", entity, "application/json", handler);
+    }
+
+    public void updateAwareness(Awareness awareness   , AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(awareness.toJson().toString(), "UTF-8");
+        Log.i(" out ", awareness.toJson().toString());
+        client.put(context, API_URL + "Awarenesses/?id="+awareness.Id, entity, "application/json", handler);
+    }
+    public void deleteAwareness(Awareness awareness   , AsyncHttpResponseHandler handler)
+    {
+        StringEntity entity = new StringEntity(awareness.toJson().toString(), "UTF-8");
+        Log.i(" out ", awareness.toJson().toString());
+        client.delete(context, API_URL + "Awarenesses/?id="+awareness.Id, null, "application/json", handler);
     }
 
 }

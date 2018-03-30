@@ -1,6 +1,7 @@
 package com.oscc.oscc;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         server = new Server(MainActivity.this);
+      //  login();
         fillData();
 
     }
@@ -101,44 +103,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Log.i("OK", res);
                             JSONObject juser = new JSONObject(res);
                             user = new User(juser.toString());
-                            setNav(navigationView);
+                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userName_tv)).setText(user.UserName);
+                            ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userEmail_tv)).setText(user.UserEmail);
                             Toast.makeText(MainActivity.this,"Welcome "+ user.UserName,Toast.LENGTH_LONG).show();
-                            switch (user.UserType)
-                            {
-                                case 1:
-                                {
-                                    //TODO go to admin activity
 
-
-                                    Intent hospital = new Intent(MainActivity.this,HospitalActivity.class);
-                                    MainActivity.this.startActivity(hospital);
-
-
-
-
-                                  //  fragmentManager.beginTransaction().replace(R.id.container, new AdminFragment()).commit();
-
-                                    break;
-                                }
-
-                                case 2:
-                                {
-                                    //TODO go to hospital admin activity
-
-                                   // fragmentManager.beginTransaction().replace(R.id.container, new HospitalFragment()).commit();
-                                    break;
-                                }
-                                case 3:
-                                {
-                                    //TODO go to user activity
-
-
-                                    UserFragment userFragment = new UserFragment();
-                                    fragmentManager.beginTransaction().replace(R.id.container,userFragment).commit();
-                                    userFragment.setStories();
-                                    break;
-                                }
-                            }
 
                             loginDialog.cancel();
                         } catch (UnsupportedEncodingException e) {
@@ -307,6 +275,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             finish();
         }
+        else if (id == R.id.hospitals)
+        {
+            Intent intent = new Intent(MainActivity.this,HospitalActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
+        else if (id == R.id.cancers)
+        {
+
+            Intent intent = new Intent(MainActivity.this,CancerActivity.class);
+            MainActivity.this.startActivity(intent);
+
+        }
+        else if (id == R.id.awareness)
+        {
+            Intent intent = new Intent(MainActivity.this,AwarenessActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
+        else if (id == R.id.specialists)
+        {
+            Intent intent = new Intent(MainActivity.this,SpecialistActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
+        else if (id == R.id.stories)
+        {
+            Intent intent = new Intent(MainActivity.this,StoryActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -473,19 +468,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         ((TextView) nav.getHeaderView(0).findViewById(R.id.userName_tv)).setText(user.UserName);
         ((TextView) nav.getHeaderView(0).findViewById(R.id.userEmail_tv)).setText(user.UserEmail);
-        switch (user.UserType)
+        nav.getMenu().findItem(R.id.sign_out).setTitle("Go Back");
+
+
+
+    }
+
+    public static boolean onNavigationItemSelected2(Context context, MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.sign_out) {
+
+           //finish();
+        }
+        else if (id == R.id.hospitals)
         {
-            case 1:
-                nav.getMenu().setGroupVisible(R.id.admin_group,true);
-                break;
-            case 2:
-                nav.getMenu().setGroupVisible(R.id.hospital_admin_group,true);
-                break;
-            case 3:
-                nav.getMenu().setGroupVisible(R.id.user_group,true);
-                break;
+            Intent intent = new Intent(context,HospitalActivity.class);
+
+            context.startActivity(intent);
+        }
+        else if (id == R.id.cancers)
+        {
+
+            Intent intent = new Intent(context,CancerActivity.class);
+            context.startActivity(intent);
+
+        }
+        else if (id == R.id.awareness)
+        {
+            Intent intent = new Intent(context,AwarenessActivity.class);
+            context.startActivity(intent);
+        }
+        else if (id == R.id.specialists)
+        {
+            Intent intent = new Intent(context,SpecialistActivity.class);
+            context.startActivity(intent);
+        }
+        else if (id == R.id.stories)
+        {
+            Intent intent = new Intent(context,StoryActivity.class);
+            context.startActivity(intent);
         }
 
 
+
+        return true;
     }
 }

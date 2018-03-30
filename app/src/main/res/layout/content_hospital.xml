@@ -4,13 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.oscc.oscc.HospitalActivity"
     tools:showIn="@layout/app_bar_hospital">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <CheckBox
+            android:id="@+id/filter_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="filter by cancer" />
+
+        <Spinner
+            android:id="@+id/cancer_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/hospitals_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

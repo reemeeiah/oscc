@@ -75,4 +75,21 @@ public class Hospital {
 
     }
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj instanceof Hospital){
+            Hospital c = (Hospital ) obj;
+            if( c.Id==Id) return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return HospitalName;
+    }
+
+
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="StoryTitle_tx" type="id">100001</item>
+    <item name="StoryDescription_tx" type="id">100002</item>
+    <item name="AwareTitle_tx" type="id">100003</item>
+    <item name="AwareDescription_tx" type="id">100004</item>
+</resources>

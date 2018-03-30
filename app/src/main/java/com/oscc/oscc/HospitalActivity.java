@@ -18,15 +18,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.oscc.oscc.Adapters.HospitalAdapter;
 import com.oscc.oscc.Adapters.SpecialistAdapter;
+import com.oscc.oscc.Models.Cancer;
 import com.oscc.oscc.Models.Hospital;
 import com.oscc.oscc.Models.Specialist;
 
@@ -38,6 +42,7 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 
 import static com.oscc.oscc.MainActivity.data;
+import static com.oscc.oscc.MainActivity.onNavigationItemSelected2;
 import static com.oscc.oscc.MainActivity.server;
 import static com.oscc.oscc.MainActivity.setNav;
 import static com.oscc.oscc.MainActivity.user;
@@ -69,6 +74,7 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
             }
         });
 
+        if(user.UserType ==1 ){fab.setVisibility(View.VISIBLE);}else {fab.setVisibility(View.INVISIBLE);}
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -82,11 +88,97 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
 
         refreshHospitals();
 
+        ((CheckBox)findViewById(R.id.filter_cb)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                refreshHospitals();
+            }
+        });
+
+        ((Spinner)findViewById(R.id.cancer_sp)).setAdapter(new ArrayAdapter<Cancer>(HospitalActivity.this, android.R.layout.simple_spinner_dropdown_item, data.cancers));
+        ((Spinner)findViewById(R.id.cancer_sp)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(((CheckBox)findViewById(R.id.filter_cb)).isChecked())
+                {
+                    HospitalAdapter adapter = new HospitalAdapter(HospitalActivity.this,MainActivity.data.getHospitalsByCancerId(((Cancer)((Spinner)findViewById(R.id.cancer_sp)).getSelectedItem()).Id));
+                    hospitals_lv.setAdapter(adapter);
+                    hospitals_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Hospital hospital = (Hospital) view.getTag();
+
+                            showHospital(hospital,(user.Id == hospital.HospitalAdminUserId));
+                        }
+                    });
+
+                    hospitals_lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                            final Hospital hospital = (Hospital) view.getTag();
+                            if(hospital.HospitalAdminUserId == user.Id)
+                            {
+
+                                new AlertDialog.Builder(HospitalActivity.this)
+                                        .setTitle("warning")
+                                        .setMessage("Do you really want to Delete this Hospital?")
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                            public void onClick(DialogInterface dialog, int whichButton) {
+                                                server.DeleteHospital(hospital, new AsyncHttpResponseHandler() {
+                                                    @Override
+                                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                        for(int i=0;i<data.hospitals.size();i++)
+                                                        {
+                                                            if(data.hospitals.get(i).Id == hospital.Id)
+                                                            {
+                                                                data.hospitals.remove(i);
+                                                            }
+                                                        }
+                                                        refreshHospitals();
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                                                    }
+                                                });
+                                            }})
+                                        .setNegativeButton(android.R.string.no, null).show();
+
+
+
+
+                            }
+
+                            return true;
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
     public void refreshHospitals()
     {
-        HospitalAdapter adapter = new HospitalAdapter(HospitalActivity.this,MainActivity.data.hospitals);
-        hospitals_lv.setAdapter(adapter);
+        if(((CheckBox)findViewById(R.id.filter_cb)).isChecked())
+        {
+            HospitalAdapter adapter = new HospitalAdapter(HospitalActivity.this,MainActivity.data.getHospitalsByCancerId(((Cancer)((Spinner)findViewById(R.id.cancer_sp)).getSelectedItem()).Id));
+            hospitals_lv.setAdapter(adapter);
+        }
+        else
+        {
+            HospitalAdapter adapter = new HospitalAdapter(HospitalActivity.this,MainActivity.data.hospitals);
+            hospitals_lv.setAdapter(adapter);
+        }
+
         hospitals_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -142,11 +234,11 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
     }
 
 
-    void showHospital(final Hospital hospital, boolean canEdit)
+    void showHospital(final Hospital hospital, final boolean canEdit)
     {
-        final Dialog dialog = new Dialog(HospitalActivity.this);
+        final Dialog dialog = new Dialog(HospitalActivity.this,R.style.Dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.add_hospital);
+        dialog.setContentView(R.layout.hospital_dialog);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
         //dialog.setCancelable(false);
         if(hospital.Id >0)
@@ -166,6 +258,13 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
         ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).setText(hospital.HospitalLatLong);
          SpecialistAdapter specialistAdapter = new SpecialistAdapter(HospitalActivity.this,hospital.Specialists);
         ((ListView)dialog.findViewById(R.id.hospital_specialist_lv)).setAdapter(specialistAdapter);
+        ((ListView)dialog.findViewById(R.id.hospital_specialist_lv)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Specialist specialist = (Specialist)view.getTag();
+                viewItem(specialist,canEdit,hospital,((ListView)dialog.findViewById(R.id.hospital_specialist_lv)));
+            }
+        });
         if(!canEdit)
         {
             ((EditText)dialog.findViewById(R.id.HospitalName_tx)).setEnabled(false);
@@ -281,21 +380,160 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
     void addSpecialist(Hospital hospital, ListView lv)
     {
         Specialist specialist = new Specialist();
-        specialist.SpecialistName="dd";
         specialist.SpecialistHospitalId = hospital.Id;
-        specialist.SpecialistCancerId=1;
-        specialist.SpecialistEmail ="a@a.a";
-        specialist.SpecialistMajor = "sss";
-        hospital.Specialists.add(specialist);
-        for(int i=0;i<data.hospitals.size();i++)
+        viewItem(specialist,true,hospital,lv);
+    }
+
+    void viewItem(final Specialist item, boolean canEdit, final Hospital hospital, final ListView lv)
+    {
+        final Dialog dialog = new Dialog(HospitalActivity.this,R.style.Dialog);
+        // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.specialist_dialog);
+        dialog.setTitle(item.Id>0? "Specialist "+item.Id: "New Specialist ");
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        ((EditText)dialog.findViewById(R.id.SpecialistName_tx)).setEnabled(canEdit);
+        ((EditText)dialog.findViewById(R.id.SpecialistMajor_tx)).setEnabled(canEdit);
+        ((EditText)dialog.findViewById(R.id.SpecialistEmail_tx)).setEnabled(canEdit);
+
+        ((Spinner)dialog.findViewById(R.id.SpecialistHospitalId_sp)).setAdapter(new ArrayAdapter<Hospital>(HospitalActivity.this, android.R.layout.simple_spinner_dropdown_item, data.hospitals));
+        ((Spinner)dialog.findViewById(R.id.SpecialistCancerId_sp)).setAdapter(new ArrayAdapter<Cancer>(HospitalActivity.this, android.R.layout.simple_spinner_dropdown_item, data.cancers));
+
+        ((Spinner)dialog.findViewById(R.id.SpecialistCancerId_sp)).setEnabled(canEdit);
+        ((Spinner)dialog.findViewById(R.id.SpecialistHospitalId_sp)).setEnabled(false);
+
+        ((Spinner)dialog.findViewById(R.id.SpecialistHospitalId_sp)).setSelection(data.getHospitalIndexById(item.SpecialistHospitalId));
+        if(item.Id>0)
         {
-            if(data.hospitals.get(i).Id == hospital.Id)
-            {
-                data.hospitals.set(i,hospital);
-            }
+            ((EditText)dialog.findViewById(R.id.SpecialistName_tx)).setText(item.SpecialistName);
+            ((EditText)dialog.findViewById(R.id.SpecialistMajor_tx)).setText(item.SpecialistMajor);
+            ((EditText)dialog.findViewById(R.id.SpecialistEmail_tx)).setText(item.SpecialistEmail);
+
+            ((Spinner)dialog.findViewById(R.id.SpecialistCancerId_sp)).setSelection(data.getCancerIndexById(item.SpecialistCancerId));
         }
-        SpecialistAdapter specialistAdapter = new SpecialistAdapter(HospitalActivity.this,hospital.Specialists);
-        lv.setAdapter(specialistAdapter);
+
+
+
+        if(canEdit)
+        {
+            ((Button)dialog.findViewById(R.id.save_bt)).setVisibility(View.VISIBLE);
+            if(item.Id>0)
+            {
+                ((Button)dialog.findViewById(R.id.delete_bt)).setVisibility(View.VISIBLE);
+            }
+
+            ((Button)dialog.findViewById(R.id.save_bt)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    item.SpecialistName = ((EditText)dialog.findViewById(R.id.SpecialistName_tx)).getText().toString();
+                    item.SpecialistMajor = ((EditText)dialog.findViewById(R.id.SpecialistMajor_tx)).getText().toString();
+                    item.SpecialistEmail = ((EditText)dialog.findViewById(R.id.SpecialistEmail_tx)).getText().toString();
+                    item.SpecialistCancerId = ((Cancer)((Spinner)dialog.findViewById(R.id.SpecialistCancerId_sp)).getSelectedItem()).Id;
+                    item.SpecialistHospitalId = hospital.Id;
+
+                    if(item.Id>0)
+                    {
+                        server.updateSpecialist(item, new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                for (Specialist specialist: data.specialists)
+                                {
+                                    if(specialist.Id== item.Id){ specialist=item; }
+                                }
+
+                                for (Specialist specialist: hospital.Specialists)
+                                {
+                                    if(specialist.Id== item.Id){ specialist=item; }
+                                }
+
+                                data.updateHospital(hospital);
+                                SpecialistAdapter specialistAdapter = new SpecialistAdapter(HospitalActivity.this,hospital.Specialists);
+                                lv.setAdapter(specialistAdapter);
+                                dialog.cancel();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                            }
+                        });
+                    }
+                    else
+                    {
+                        server.postSpecialist(item, new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                try {
+                                    data.specialists.add(new Specialist(new String(responseBody, "UTF-8")));
+
+                                    hospital.Specialists.add(new Specialist(new String(responseBody, "UTF-8")));
+                                   data.updateHospital(hospital);
+                                    SpecialistAdapter specialistAdapter = new SpecialistAdapter(HospitalActivity.this,hospital.Specialists);
+                                    lv.setAdapter(specialistAdapter);
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+
+                                dialog.cancel();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                            }
+                        });
+                    }
+
+                }
+            });
+
+            ((Button)dialog.findViewById(R.id.delete_bt)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    new AlertDialog.Builder(HospitalActivity.this)
+                            .setTitle("warning")
+                            .setMessage("Do you really want to Delete this Hospital?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface d, int whichButton) {
+                                    server.updateSpecialist(item, new AsyncHttpResponseHandler() {
+                                        @Override
+                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                            data.specialists.remove(item);
+
+                                            hospital.Specialists.remove(item);
+                                            data.updateHospital(hospital);
+                                            SpecialistAdapter specialistAdapter = new SpecialistAdapter(HospitalActivity.this,hospital.Specialists);
+                                            lv.setAdapter(specialistAdapter);
+
+                                            dialog.cancel();
+                                        }
+
+                                        @Override
+                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                                        }
+                                    });
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
+
+
+                }
+            });
+        }
+
+        ((Button)dialog.findViewById(R.id.cancel_bt)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+
+        dialog.show();
     }
 
     @Override
@@ -333,11 +571,15 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.add_story) {
-            // Handle the camera action
+        if (id == R.id.sign_out) {
+
+            finish();
+        }
+        else
+        {
+            onNavigationItemSelected2(HospitalActivity.this,item);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

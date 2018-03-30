@@ -39,7 +39,8 @@ public class Story {
     {
         JSONObject s = new JSONObject();
         try {
-//            s.put("StoryTime",this.StoryTime);
+            s.put("Id",this.Id);
+            s.put("StoryTime",this.StoryTime);
             s.put("StoryUserId",this.StoryUserId);
             s.put("StoryTitle",this.StoryTitle);
             s.put("StoryDescription",this.StoryDescription);

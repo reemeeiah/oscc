@@ -1,6 +1,12 @@
 package com.oscc.oscc.Models;
 
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import com.oscc.oscc.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +58,31 @@ public class Awareness
         return a;
     }
 
+    public View getView(Context context, boolean canEdit)
+    {
+        LinearLayout view = new LinearLayout(context);
+        view.setOrientation(LinearLayout.VERTICAL);
+        view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+
+        EditText AwareTitle_tx = new EditText(context);
+        AwareTitle_tx.setId(R.id.AwareTitle_tx);
+        AwareTitle_tx.setHint("Aware Title");
+        AwareTitle_tx.setEnabled(canEdit);
+
+        EditText AwareDescription_tx = new EditText(context);
+        AwareDescription_tx.setId(R.id.AwareDescription_tx);
+        AwareDescription_tx.setHint("Aware Description");
+        AwareDescription_tx.setEnabled(canEdit);
+
+        AwareTitle_tx.setText(this.AwareTitle);
+        AwareDescription_tx.setText(this.AwareDescription);
+
+
+        view.addView(AwareTitle_tx);
+        view.addView(AwareDescription_tx);
+
+        return view;
+    }
 
 
 }
