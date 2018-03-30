@@ -216,4 +216,122 @@ public class Data
         fillSpecialists();
         fillStories();
     }
+
+    public String getUserName(int userId)
+    {
+
+        return "";
+    }
+
+    public int getAwarenessIndexById(int id)
+    {
+
+        int i=0;
+        for (Awareness a: awarenesses)
+        {
+            if(a.Id== id){
+                return i;
+            }
+            i++;
+
+        }
+        return 0;
+    }
+
+    public void updateAwareness(Awareness awareness)
+    {
+        for (Awareness a: awarenesses)
+        {
+            if(a.Id== awareness.Id){
+                a=awareness;
+            }
+
+
+        }
+    }
+
+    public void updateHospital(Hospital hospital )
+    {
+        for (Hospital a: hospitals)
+        {
+            if(a.Id== hospital.Id){
+                a=hospital;
+            }
+
+
+        }
+    }
+
+    public Hospital getHospitalById(int id)
+    {
+        for (Hospital a: hospitals)
+        {
+            if(a.Id== id){
+               return a;
+            }
+        }
+
+        return new Hospital();
+    }
+
+    public Cancer getCancerById(int id)
+    {
+        for (Cancer a: cancers)
+        {
+            if(a.Id== id){
+                return a;
+            }
+        }
+
+        return new Cancer();
+    }
+    public int getCancerIndexById(int id)
+    {
+        int i=0;
+        for (Cancer a: cancers)
+        {
+            if(a.Id== id){
+                return i;
+            }
+            i++;
+
+        }
+        return 0;
+    }
+
+    public int getHospitalIndexById(int id)
+    {
+        int i=0;
+        for (Hospital a: hospitals)
+        {
+            if(a.Id== id){
+                return i;
+            }
+            i++;
+
+        }
+        return 0;
+    }
+
+    public  ArrayList<Hospital> getHospitalsByCancerId(int cancerId)
+    {
+        ArrayList<Hospital> res = new ArrayList<>();
+
+        for (Hospital a: hospitals)
+        {
+            for (Specialist s: a.Specialists)
+            {
+                if(s.SpecialistCancerId==cancerId)
+                {
+                    res.add(a);
+                    break;
+                }
+
+            }
+
+        }
+
+
+        return res;
+    }
 }

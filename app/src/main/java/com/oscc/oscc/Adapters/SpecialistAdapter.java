@@ -12,6 +12,8 @@ import com.oscc.oscc.R;
 
 import java.util.ArrayList;
 
+import static com.oscc.oscc.MainActivity.data;
+
 /**
  * Created by Nona on 3/17/2018.
  */
@@ -30,6 +32,7 @@ public class SpecialistAdapter extends ArrayAdapter<Specialist>{
         }
 
         ((TextView)convertView.findViewById(R.id.specialistName_tv)).setText(specialist.SpecialistName);
+        ((TextView)convertView.findViewById(R.id.SpecialistCancerId_tv)).setText(data.getCancerById(specialist.SpecialistCancerId).CancerName);
 
         convertView.setTag(specialist);
         return convertView;

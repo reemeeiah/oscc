@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <EditText
+            android:id="@+id/CancerName_tx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cancer Name" />
+
+        <EditText
+            android:id="@+id/CancerDescription_tx"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:hint="Cancer Description"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/CancerTreatment_tx"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:hint="Cancer Treatment"
+            android:inputType="textMultiLine" />
+
+    </LinearLayout>
+    <include layout="@layout/dialog_buttons" />
+
+</LinearLayout>
