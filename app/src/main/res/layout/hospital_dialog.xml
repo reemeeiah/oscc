@@ -41,7 +41,7 @@
 
                     android:hint="Hospital name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@android:color/background_dark"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -59,7 +59,8 @@
 
             android:ems="10"
             android:hint="Hospital address"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@android:color/background_dark" />
 
         <EditText
             android:id="@+id/HospitalPhone_tx"
@@ -68,7 +69,8 @@
 
             android:ems="10"
             android:hint="Hospital Contact"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@android:color/background_dark" />
 
 
         <EditText
@@ -78,7 +80,8 @@
 
             android:ems="10"
             android:hint="Hospital Phone"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColor="@android:color/background_dark" />
 
         <Button
             android:id="@+id/add_hospital_bt"
@@ -86,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="add"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/background_dark" />
     </LinearLayout>
 
     <LinearLayout
