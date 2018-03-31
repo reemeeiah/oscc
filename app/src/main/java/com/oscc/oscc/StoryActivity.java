@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.oscc.oscc.Adapters.StoryAdapter;
@@ -84,7 +85,10 @@ public class StoryActivity extends AppCompatActivity implements NavigationView.O
         final Dialog dialog = new Dialog(StoryActivity.this,R.style.Dialog);
        // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.story_dialog);
-        dialog.setTitle(item.Id>0? "Story "+item.Id: "New Story ");
+        //dialog.setTitle(item.Id>0? "Story "+item.Id: "New Story ");
+
+
+        dialog.setTitle(item.Id>0?"Story of ": "New Story ");
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
 
@@ -94,6 +98,7 @@ public class StoryActivity extends AppCompatActivity implements NavigationView.O
 
         if(item.Id>0)
         {
+
             ((EditText)dialog.findViewById(R.id.StoryTitle_tx)).setText(""+item.StoryTitle);
             ((EditText)dialog.findViewById(R.id.StoryDescription_tx)).setText(""+item.StoryDescription);
 

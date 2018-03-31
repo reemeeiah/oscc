@@ -87,7 +87,8 @@ public class AwarenessActivity extends AppCompatActivity implements NavigationVi
         final Dialog dialog = new Dialog(AwarenessActivity.this,R.style.Dialog);
        // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.awareness_dialog);
-        dialog.setTitle(item.Id>0? "Aware "+item.Id: "New Aware ");
+       // dialog.setTitle(item.Id>0? "awareness "+item.Id: "New awareness ");
+        dialog.setTitle(item.Id>0? "awareness " : "New awareness ");
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
 
