@@ -53,9 +53,15 @@ public class AwarenessActivity extends AppCompatActivity implements NavigationVi
             }
         });
 
+<<<<<<< HEAD
         if(user.UserType ==1){fab.setVisibility(View.VISIBLE);}else {fab.setVisibility(View.INVISIBLE);}
 
 
+=======
+
+
+        if(user.UserType ==1 || user.UserType==2){fab.setVisibility(View.VISIBLE);}else {fab.setVisibility(View.INVISIBLE);}
+>>>>>>> origin/master
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
