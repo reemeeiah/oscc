@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="10">
 
@@ -18,24 +18,46 @@
             android:textColor="@android:color/background_dark" />
 
         <EditText
-            android:id="@+id/CancerDescription_tx"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:hint="Cancer Description"
-            android:inputType="textMultiLine"
-            android:textColor="@android:color/background_dark" />
-
-        <EditText
             android:id="@+id/CancerTreatment_tx"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="5"
             android:hint="Cancer Treatment"
             android:inputType="textMultiLine"
             android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
-    <include layout="@layout/dialog_buttons" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/CancerDescription_tx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:hint="Cancer Description"
+                    android:inputType="textMultiLine"
+                    android:textColor="@android:color/background_dark" />
+
+                <include
+                    layout="@layout/dialog_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

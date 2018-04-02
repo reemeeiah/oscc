@@ -84,7 +84,7 @@ public class CancerActivity extends AppCompatActivity implements NavigationView.
         final Dialog dialog = new Dialog(CancerActivity.this,R.style.Dialog);
        // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.cancer_dialog);
-        dialog.setTitle(item.Id>0? "Cancer ": "New Cancer ");
+        dialog.setTitle(item.Id>0? "Cancer Information": "New Cancer ");
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
 

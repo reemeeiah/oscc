@@ -3,20 +3,24 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <TextView
+        android:id="@+id/AwareTime_tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/containera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="10">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/AwareTime_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="invisible" />
+            android:layout_width="371dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <EditText
                 android:id="@+id/AwareTitle_tx"
@@ -24,21 +28,37 @@
                 android:layout_height="wrap_content"
                 android:hint="Title"
                 android:textColor="@android:color/background_dark" />
-
-            <EditText
-                android:id="@+id/AwareDescription_tx"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:hint="Description"
-                android:inputType="textMultiLine"
-                android:textColor="@android:color/background_dark" />
-
-            <include
-                layout="@layout/dialog_buttons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/AwareDescription_tx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    android:inputType="textMultiLine"
+                    android:textColor="@android:color/background_dark" />
+
+                <include
+                    layout="@layout/dialog_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

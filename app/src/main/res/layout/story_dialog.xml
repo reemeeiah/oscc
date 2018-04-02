@@ -49,13 +49,14 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:textColor="@android:color/background_dark" />
+
+                <include
+                    layout="@layout/dialog_buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
 
     </LinearLayout>
 
-    <include
-        layout="@layout/dialog_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

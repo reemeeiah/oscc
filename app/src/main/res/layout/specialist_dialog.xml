@@ -27,7 +27,8 @@
                 android:id="@+id/SpecialistName_tx"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="7" />
+                android:layout_weight="7"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,7 +48,8 @@
                 android:id="@+id/SpecialistMajor_tx"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="7" />
+                android:layout_weight="7"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,7 +69,8 @@
                 android:id="@+id/SpecialistEmail_tx"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="7" />
+                android:layout_weight="7"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
