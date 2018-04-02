@@ -17,32 +17,45 @@
             android:orientation="horizontal"
             android:weightSum="10">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center_vertical"
-                android:text="Title" />
-
             <EditText
                 android:id="@+id/StoryTitle_tx"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="8" />
+                android:layout_weight="8"
+                android:textColor="@android:color/background_dark" />
+
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Story" />
-
-        <EditText
-            android:id="@+id/StoryDescription_tx"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:inputType="textMultiLine" />
     </LinearLayout>
 
-    <include layout="@layout/dialog_buttons" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/StoryDescription_tx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textColor="@android:color/background_dark" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/dialog_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

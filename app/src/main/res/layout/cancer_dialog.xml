@@ -14,7 +14,8 @@
             android:id="@+id/CancerName_tx"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cancer Name" />
+            android:hint="Cancer Name"
+            android:textColor="@android:color/background_dark" />
 
         <EditText
             android:id="@+id/CancerDescription_tx"
@@ -22,7 +23,8 @@
             android:layout_height="0dp"
             android:layout_weight="5"
             android:hint="Cancer Description"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/background_dark" />
 
         <EditText
             android:id="@+id/CancerTreatment_tx"
@@ -30,7 +32,8 @@
             android:layout_height="0dp"
             android:layout_weight="5"
             android:hint="Cancer Treatment"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/background_dark" />
 
     </LinearLayout>
     <include layout="@layout/dialog_buttons" />

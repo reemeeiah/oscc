@@ -8,7 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_hospital">HospitalActivity</string>
+    <string name="title_activity_hospital">Hospitals</string>
     <string name="title_activity_cancer">Cancers</string>
     <string name="title_activity_awareness">Awareness</string>
     <string name="title_activity_specialist">Specialist</string>

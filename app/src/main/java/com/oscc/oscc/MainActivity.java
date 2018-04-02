@@ -385,7 +385,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         data.hospitals.add(hospital);
                         Log.e("Hospitals",hospital.HospitalName);
                     }
-                    ((TextView)findViewById(R.id.total_hospitals_tv)).setText(" We have ("+data.hospitals.size()+") Hospitals");
+                    ((TextView)findViewById(R.id.total_hospitals_tv)).setText(" We have "+data.hospitals.size()+" Hospitals");
+                    ((TextView)findViewById(R.id.total_special)).setText(" We have "+data.specialists.size()+" Specialists");
+
+                    //total_special_tv
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("Stories",e.getMessage());
