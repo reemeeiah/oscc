@@ -10,7 +10,6 @@
         android:id="@+id/cancel_bt"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_weight="3"
         android:background="#7ab4ad"
