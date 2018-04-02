@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
 
             android:ems="10"
-            android:hint="Hospital Phone"
+            android:hint="Hospital Location"
             android:inputType="phone"
             android:textColor="@android:color/background_dark" />
 

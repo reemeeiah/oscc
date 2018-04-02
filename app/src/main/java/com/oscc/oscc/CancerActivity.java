@@ -88,9 +88,17 @@ public class CancerActivity extends AppCompatActivity implements NavigationView.
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
 
-        ((EditText)dialog.findViewById(R.id.CancerName_tx)).setEnabled(canEdit);
-        ((EditText)dialog.findViewById(R.id.CancerDescription_tx)).setEnabled(canEdit);
-        ((EditText)dialog.findViewById(R.id.CancerTreatment_tx)).setEnabled(canEdit);
+        ((EditText)dialog.findViewById(R.id.CancerName_tx)).setFocusable(canEdit);
+        ((EditText)dialog.findViewById(R.id.CancerDescription_tx)).setFocusable(canEdit);
+        ((EditText)dialog.findViewById(R.id.CancerTreatment_tx)).setFocusable(canEdit);
+
+        ((EditText)dialog.findViewById(R.id.CancerName_tx)).setFocusableInTouchMode(canEdit);
+        ((EditText)dialog.findViewById(R.id.CancerDescription_tx)).setFocusableInTouchMode(canEdit);
+        ((EditText)dialog.findViewById(R.id.CancerTreatment_tx)).setFocusableInTouchMode(canEdit);
+
+        ((EditText)dialog.findViewById(R.id.CancerName_tx)).setClickable(canEdit);
+        ((EditText)dialog.findViewById(R.id.CancerDescription_tx)).setClickable(canEdit);
+        ((EditText)dialog.findViewById(R.id.CancerTreatment_tx)).setClickable(canEdit);
 
         if(item.Id>0)
         {

@@ -3,6 +3,8 @@ package com.oscc.oscc;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -270,7 +272,20 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
             ((EditText)dialog.findViewById(R.id.HospitalName_tx)).setEnabled(false);
             ((EditText)dialog.findViewById(R.id.HospitalAddress_tx)).setEnabled(false);
             ((EditText)dialog.findViewById(R.id.HospitalPhone_tx)).setEnabled(false);
-            ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).setEnabled(false);
+            ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).setFocusable(false);
+            ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).setFocusableInTouchMode(false);
+            ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).setClickable(true);
+            ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri gmmIntentUri = Uri.parse("google.navigation:q="+hospital.HospitalLatLong);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(mapIntent);
+                    }
+                }
+            });
         }
 
         if(hospital.Id ==0&& canEdit)

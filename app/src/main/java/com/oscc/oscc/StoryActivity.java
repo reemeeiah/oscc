@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.oscc.oscc.Adapters.StoryAdapter;
@@ -92,8 +91,14 @@ public class StoryActivity extends AppCompatActivity implements NavigationView.O
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
 
-        ((EditText)dialog.findViewById(R.id.StoryTitle_tx)).setEnabled(canEdit);
-        ((EditText)dialog.findViewById(R.id.StoryDescription_tx)).setEnabled(canEdit);
+        ((EditText)dialog.findViewById(R.id.StoryTitle_tx)).setFocusable(canEdit);
+        ((EditText)dialog.findViewById(R.id.StoryDescription_tx)).setFocusable(canEdit);
+
+        ((EditText)dialog.findViewById(R.id.StoryTitle_tx)).setFocusableInTouchMode(canEdit);
+        ((EditText)dialog.findViewById(R.id.StoryDescription_tx)).setFocusableInTouchMode(canEdit);
+
+        ((EditText)dialog.findViewById(R.id.StoryTitle_tx)).setClickable(canEdit);
+        ((EditText)dialog.findViewById(R.id.StoryDescription_tx)).setClickable(canEdit);
 
 
         if(item.Id>0)
