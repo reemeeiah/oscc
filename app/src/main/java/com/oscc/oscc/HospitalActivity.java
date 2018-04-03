@@ -404,7 +404,7 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
         final Dialog dialog = new Dialog(HospitalActivity.this,R.style.Dialog);
         // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.specialist_dialog);
-        dialog.setTitle(item.Id>0? "Specialist "+item.Id: "New Specialist ");
+        dialog.setTitle(item.Id>0? "Specialist ": "New Specialist ");
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT ,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
 
