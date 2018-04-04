@@ -20,7 +20,7 @@ import cz.msebera.android.httpclient.Header;
 import static com.oscc.oscc.MainActivity.server;
 
 /**
- * Created by Anwar on 2018-03-18.
+ *
  */
 
 public class Data

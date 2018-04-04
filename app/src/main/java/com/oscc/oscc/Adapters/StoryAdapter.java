@@ -13,7 +13,7 @@ import com.oscc.oscc.R;
 import java.util.ArrayList;
 
 /**
- * Created by Anwar on 2018-03-14.
+ * Created by nona on 2018-03-14.
  */
 
 public class StoryAdapter extends ArrayAdapter<Story> {
