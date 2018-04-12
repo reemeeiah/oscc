@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="USER NAME" />
+                android:hint="Username" />
 
             <EditText
                 android:id="@+id/userPassword_tx"

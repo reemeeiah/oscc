@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.oscc.oscc.Adapters.SpecialistAdapter;
@@ -128,53 +129,58 @@ public class SpecialistActivity extends AppCompatActivity implements NavigationV
                 @Override
                 public void onClick(View v) {
 
-                    item.SpecialistName = ((EditText)dialog.findViewById(R.id.SpecialistName_tx)).getText().toString();
-                    item.SpecialistMajor = ((EditText)dialog.findViewById(R.id.SpecialistMajor_tx)).getText().toString();
-                    item.SpecialistEmail = ((EditText)dialog.findViewById(R.id.SpecialistEmail_tx)).getText().toString();
-                    item.SpecialistCancerId = ((Cancer)((Spinner)dialog.findViewById(R.id.SpecialistCancerId_sp)).getSelectedItem()).Id;
-                    item.SpecialistHospitalId = ((Hospital)((Spinner)dialog.findViewById(R.id.SpecialistHospitalId_sp)).getSelectedItem()).Id;
+                    item.SpecialistName = ((EditText) dialog.findViewById(R.id.SpecialistName_tx)).getText().toString();
+                    item.SpecialistMajor = ((EditText) dialog.findViewById(R.id.SpecialistMajor_tx)).getText().toString();
+                    item.SpecialistEmail = ((EditText) dialog.findViewById(R.id.SpecialistEmail_tx)).getText().toString();
+                    item.SpecialistCancerId = ((Cancer) ((Spinner) dialog.findViewById(R.id.SpecialistCancerId_sp)).getSelectedItem()).Id;
+                    item.SpecialistHospitalId = ((Hospital) ((Spinner) dialog.findViewById(R.id.SpecialistHospitalId_sp)).getSelectedItem()).Id;
 
-                    if(item.Id>0)
-                    {
-                        server.updateSpecialist(item, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                for (Specialist specialist: data.specialists)
-                                {
-                                    if(specialist.Id== item.Id){ specialist=item; }
+                    if (isValidEmail(((EditText) dialog.findViewById(R.id.SpecialistEmail_tx)).getText().toString())) {
+                        if (item.Id > 0) {
+                            server.updateSpecialist(item, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    for (Specialist specialist : data.specialists) {
+                                        if (specialist.Id == item.Id) {
+                                            specialist = item;
+                                        }
+                                    }
+                                    setData();
+                                    dialog.cancel();
                                 }
-                                setData();
-                                dialog.cancel();
-                            }
 
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
-                            }
-                        });
+                                }
+                            });
+                        } else {
+                            server.postSpecialist(item, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    try {
+                                        data.specialists.add(new Specialist(new String(responseBody, "UTF-8")));
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+                                    setData();
+                                    dialog.cancel();
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                                }
+                            });
+                        }
+
                     }
                     else
                     {
-                        server.postSpecialist(item, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                try {
-                                    data.specialists.add(new Specialist(new String(responseBody, "UTF-8")));
-                                } catch (UnsupportedEncodingException e) {
-                                    e.printStackTrace();
-                                }
-                                setData();
-                                dialog.cancel();
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                            }
-                        });
+                        ((TextView)dialog.findViewById(R.id.validation_msg_tv)).setText("Email is not correct ");
                     }
-
                 }
+
             });
 
             ((Button)dialog.findViewById(R.id.delete_bt)).setOnClickListener(new View.OnClickListener() {
@@ -240,5 +246,11 @@ public class SpecialistActivity extends AppCompatActivity implements NavigationV
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null)
+            return false;
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 }

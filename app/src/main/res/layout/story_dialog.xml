@@ -22,6 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
+                android:hint="Story Title"
                 android:textColor="@android:color/background_dark" />
 
         </LinearLayout>
@@ -47,6 +48,7 @@
                     android:id="@+id/StoryDescription_tx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Story Description"
                     android:inputType="textMultiLine"
                     android:textColor="@android:color/background_dark" />
 
