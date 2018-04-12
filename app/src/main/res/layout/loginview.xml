@@ -7,6 +7,13 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/validation_msg_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fa1102"
+        android:textSize="20sp"/>
+
     <Button
         android:id="@+id/sinup_bt"
         android:layout_width="236dp"

@@ -147,7 +147,7 @@ public class Server {
 
     public void deleteSpecialist(Specialist specialist  , AsyncHttpResponseHandler handler)
     {
-        client.put(context, API_URL + "Specialists/?id="+specialist.Id, null, "application/json", handler);
+        client.delete(context, API_URL + "Specialists/?id="+specialist.Id, null, "application/json", handler);
     }
 
     // Awarenesses

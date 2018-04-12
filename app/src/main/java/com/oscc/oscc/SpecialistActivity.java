@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,7 +187,7 @@ public class SpecialistActivity extends AppCompatActivity implements NavigationV
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface d, int whichButton) {
-                                    server.updateSpecialist(item, new AsyncHttpResponseHandler() {
+                                    server.deleteSpecialist(item, new AsyncHttpResponseHandler() {
                                         @Override
                                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                                             data.specialists.remove(item);
@@ -196,6 +197,7 @@ public class SpecialistActivity extends AppCompatActivity implements NavigationV
 
                                         @Override
                                         public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                            Log.e("Delete","Error "+statusCode);
 
                                         }
                                     });

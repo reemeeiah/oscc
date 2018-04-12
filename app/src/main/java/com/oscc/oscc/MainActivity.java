@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         Log.i("LoginFailed", "User name or password not correct ");
                         Toast.makeText(MainActivity.this,"User name or password not correct ",Toast.LENGTH_LONG).show();
+                        ((TextView)loginDialog.findViewById(R.id.validation_msg_tv)).setText("User name or password not correct ");
 
                     }
                 });
@@ -168,17 +169,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 //TODO send user Data to server tobe reg as new user    name and pass to server in order to mach the cridentils
-                if(pass.getText().toString().equals(re_pass.getText().toString()))
+
+                if(isValidEmail(email.getText().toString()))
                 {
-                    sendSignupRequest(editText_username.getText().toString(),pass.getText().toString(), email.getText().toString(),mobile.getText().toString(),signupDialog);
+                    if(pass.getText().toString().equals(re_pass.getText().toString()) && pass.getText().toString().length() >4)
+                    {
+                        sendSignupRequest(editText_username.getText().toString(),pass.getText().toString(), email.getText().toString(),mobile.getText().toString(),signupDialog);
+
+                    }
+                    else
+                    {
+                        re_pass.setText("");
+                        Toast.makeText(MainActivity.this,"The password is not identical ",Toast.LENGTH_LONG).show();
+                        ((TextView)signupDialog.findViewById(R.id.validation_msg_tv)).setText("The passwords is not correct ");
+
+                    }
 
                 }
                 else
                 {
-                    re_pass.setText("");
-                    Toast.makeText(MainActivity.this,"The password is not identical ",Toast.LENGTH_LONG).show();
-
+                    ((TextView)signupDialog.findViewById(R.id.validation_msg_tv)).setText("Email is not correct ");
                 }
+
 
                 //then if server return ok and get the user type also id
                // signupDialog.cancel();
@@ -519,5 +531,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         return true;
+    }
+
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null)
+            return false;
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 }

@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.oscc.oscc.Adapters.HospitalAdapter;
@@ -299,31 +300,47 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
                     hospital.HospitalAdminUserId = user.Id;
                     hospital.HospitalLatLong = ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).getText().toString();
                     hospital.HospitalPhone = ((EditText)dialog.findViewById(R.id.HospitalPhone_tx)).getText().toString();
-                    server.postHospital(hospital, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                            try {
-                                data.hospitals.add(new Hospital(new JSONObject(new String(responseBody, "UTF-8")).toString()));
-                                refreshHospitals();
-                                dialog.cancel();
+                    if(isValidLatLng( hospital.HospitalLatLong))
+                    {
+                        if(hospital.HospitalPhone.length()>9)
+                        {
+                            server.postHospital(hospital, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                            } catch (JSONException e) {
+                                    try {
+                                        data.hospitals.add(new Hospital(new JSONObject(new String(responseBody, "UTF-8")).toString()));
+                                        refreshHospitals();
+                                        dialog.cancel();
 
-                                Log.e("Hospital",e.getMessage());
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
-                                Log.e("Hospital",e.getMessage());
-                            }
+                                    } catch (JSONException e) {
 
+                                        Log.e("Hospital",e.getMessage());
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                        Log.e("Hospital",e.getMessage());
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                    refreshHospitals();
+                                    dialog.cancel();
+                                }
+                            });
+                        }else
+                        {
+                            ((TextView)dialog.findViewById(R.id.validation_msg_tv)).setText("Phone Format Error");
                         }
 
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                            refreshHospitals();
-                            dialog.cancel();
-                        }
-                    });
+                    }
+                    else
+                    {
+                        ((TextView)dialog.findViewById(R.id.validation_msg_tv)).setText("Enter the write location Format");
+                    }
+
 
                 }
             });
@@ -339,33 +356,50 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
                     hospital.HospitalAdminUserId = user.Id;
                     hospital.HospitalLatLong = ((EditText)dialog.findViewById(R.id.HospitalLatLong_tx)).getText().toString();
                     hospital.HospitalPhone = ((EditText)dialog.findViewById(R.id.HospitalPhone_tx)).getText().toString();
-                    server.UpdateHospital(hospital, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            if(statusCode ==204)
-                            {
-                                //search in the main activity data <hospitals array list> to find the matched id same like ours to be replased by the updated object
-                                for(int i=0;i<data.hospitals.size();i++)
-                                {
-                                    if(data.hospitals.get(i).Id == hospital.Id)
+
+                    if(isValidLatLng( hospital.HospitalLatLong))
+                    {
+                        if(hospital.HospitalPhone.length()>9)
+                        {
+                            server.UpdateHospital(hospital, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    if(statusCode ==204)
                                     {
-                                        data.hospitals.set(i,hospital);
+                                        //search in the main activity data <hospitals array list> to find the matched id same like ours to be replased by the updated object
+                                        for(int i=0;i<data.hospitals.size();i++)
+                                        {
+                                            if(data.hospitals.get(i).Id == hospital.Id)
+                                            {
+                                                data.hospitals.set(i,hospital);
+                                            }
+                                        }
+                                        refreshHospitals();
+                                        dialog.cancel();
                                     }
                                 }
-                                refreshHospitals();
-                                dialog.cancel();
-                            }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                                    if(statusCode ==204)
+                                    {
+                                        dialog.cancel();
+                                    }
+                                }
+                            });
+                        }else
+                        {
+                            ((TextView)dialog.findViewById(R.id.validation_msg_tv)).setText("Phone Format Error");
                         }
 
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    }
+                    else
+                    {
+                        ((TextView)dialog.findViewById(R.id.validation_msg_tv)).setText("Enter the write location Format");
+                    }
 
-                            if(statusCode ==204)
-                            {
-                                dialog.cancel();
-                            }
-                        }
-                    });
+
 
                 }
             });
@@ -447,6 +481,8 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
                     item.SpecialistEmail = ((EditText)dialog.findViewById(R.id.SpecialistEmail_tx)).getText().toString();
                     item.SpecialistCancerId = ((Cancer)((Spinner)dialog.findViewById(R.id.SpecialistCancerId_sp)).getSelectedItem()).Id;
                     item.SpecialistHospitalId = hospital.Id;
+
+
 
                     if(item.Id>0)
                     {
@@ -600,5 +636,30 @@ public class HospitalActivity extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public boolean isValidLatLng(String latlong)
+    {
+
+        if(latlong.length() >7 && latlong.split(",").length ==2)
+        {
+            double lat = Double.parseDouble( latlong.split(",")[0]),  lng= Double.parseDouble( latlong.split(",")[1]);
+            if(lat < -90 || lat > 90)
+            {
+                return false;
+            }
+            else if(lng < -180 || lng > 180)
+            {
+                return false;
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
     }
 }
