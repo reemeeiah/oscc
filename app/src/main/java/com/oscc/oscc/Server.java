@@ -15,7 +15,7 @@ import com.oscc.oscc.Models.User;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
 /**
- * Created by Anwar on 2018-03-13.
+ * Created by on 2018-03-13.
  */
 
 public class Server {
