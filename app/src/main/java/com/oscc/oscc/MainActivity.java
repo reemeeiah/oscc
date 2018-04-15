@@ -286,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.sign_out) {
 
             finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
         else if (id == R.id.hospitals)
         {
